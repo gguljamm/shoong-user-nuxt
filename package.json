@@ -1,0 +1,42 @@
+{
+  "name": "shoong-user-app",
+  "version": "1.0.0",
+  "description": "shoong app",
+  "author": "app@bringprice.com",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint",
+    "app": "NODE_ENV=prod NODE_TARGET=app nuxt generate --spa",
+    "cordova-browser": "npm run app && npm run replace-relative-paths && npm run copy-cordova",
+    "cordova-android": "npm run app && npm run replace-relative-paths && npm run copy-cordova",
+    "cordova-ios": "npm run app && npm run replace-relative-paths && npm run copy-cordova",
+    "replace-relative-paths": "replace '/nuxtfiles/' 'nuxtfiles/' dist --recursive && replace '/assets/' 'nuxtfiles/' dist --recursive && replace '(src|\"src\")=\"/' '$1=\"../' dist --recursive && replace '(src|\"src\"):\"/' '$1:\"../' dist --recursive",
+    "copy-cordova": "cp -R dist/* cordova/www/",
+    "clear-cordova": "rm -R cordova/www/*",
+    "run-android": "cd cordova && cordova run android",
+    "run-ios": "cd cordova && cordova run ios"
+  },
+  "dependencies": {
+    "firebase": "^7.6.2",
+    "nuxt": "^2.0.0",
+    "nuxt-sass-resources-loader": "^2.0.5",
+    "vue-cookies": "^1.6.1"
+  },
+  "devDependencies": {
+    "replace": "^1.1.5",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-vue": "^6.1.2",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0"
+  }
+}

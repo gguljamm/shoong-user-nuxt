@@ -1,0 +1,48 @@
+<template>
+  <ul class="footer">
+    <li
+      :class="$route.path.indexOf('/store') < 0 && $route.path.indexOf('/profile') < 0 && $route.path.indexOf('/chat') < 0 ? 'selected' : ''"
+      @click="$router.push('/')"
+    >Explore</li>
+    <li
+      :class="$route.path.indexOf('/chat') >= 0 ? 'selected' : ''"
+      @click="$router.push('/chat')"
+    >Chat</li>
+    <li
+      :class="$route.path.indexOf('/store') >= 0 ? 'selected' : ''"
+      @click="$router.push('/store')"
+    >Store</li>
+    <li
+      :class="$route.path.indexOf('/profile') >= 0 ? 'selected' : ''"
+      @click="$router.push('/profile')"
+    >Profile</li>
+  </ul>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style lang="scss" scoped>
+  .footer{
+    z-index: 9;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    display: flex;
+    box-shadow: 0 0 2px 1px rgba(0,0,0,.2);
+    background-color: #FFF;
+    > li{
+      cursor: pointer;
+      font-size: 12px;
+      text-align: center;
+      line-height: 44px;
+      flex: 0 0 25%;
+      &.selected{
+        color: darkorange;
+      }
+    }
+  }
+</style>
