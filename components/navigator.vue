@@ -31,6 +31,10 @@ export default {};
     left: 0;
     right: 0;
     height: 44px;
+    height: calc(constant(safe-area-inset-bottom) + 44px);
+    height: calc(env(safe-area-inset-bottom) + 44px);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
     display: flex;
     box-shadow: 0 0 2px 1px rgba(0,0,0,.2);
     background-color: #FFF;
@@ -44,5 +48,8 @@ export default {};
         color: darkorange;
       }
     }
+  }
+  .hideNavi .footer{
+    display: none;
   }
 </style>

@@ -24,6 +24,8 @@ export default {
   .chatBtn{
     position: fixed;
     bottom: 56px;
+    bottom: calc(constant(safe-area-inset-bottom) + 56px);
+    bottom: calc(env(safe-area-inset-bottom) + 56px);
     right: 12px;
     width: 44px;
     height: 44px;

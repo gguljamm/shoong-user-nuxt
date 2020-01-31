@@ -6,7 +6,7 @@ module.exports = {
     title: 'shoong-user-app',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover, shrink-to-fit=no' },
       { hid: 'description', name: 'description', content: 'shoong app' }
     ],
     link: [
@@ -19,13 +19,13 @@ module.exports = {
   modules: [
     ['nuxt-sass-resources-loader'],
   ],
-  css: ['~/assets/css/normalize.css'],
+  css: ['~/assets/css/normalize.css', 'assets/css/main.css'],
   plugins: [
     { src: '~/plugins/firebase.js', ssr: false },
   ],
-  // buildDir: 'build',
+  buildDir: 'build',
   build: {
-    // publicPath: '/nuxtfiles/',
+    publicPath: '/nuxtfiles/',
     /*
     ** Run ESLint on save
     */
@@ -46,8 +46,8 @@ module.exports = {
       let parent = routes.find(route => route.path === '/chat')
       parent.children = [];
       parent.children.push({
-        name: 'chat-roomId',
-        path: ':roomId',
+        name: 'chat-aos-roomId',
+        path: 'aos/:roomId',
         component: resolve(__dirname, 'components/modal.vue'),
       });
     },

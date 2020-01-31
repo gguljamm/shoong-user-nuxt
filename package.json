@@ -12,14 +12,12 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "app": "NODE_ENV=prod NODE_TARGET=app nuxt generate --spa",
-    "cordova-browser": "npm run app && npm run replace-relative-paths && npm run copy-cordova",
-    "cordova-android": "npm run app && npm run replace-relative-paths && npm run copy-cordova",
-    "cordova-ios": "npm run app && npm run replace-relative-paths && npm run copy-cordova",
+    "app-build": "npm run app && npm run replace-relative-paths && npm run copy-cordova",
     "replace-relative-paths": "replace '/nuxtfiles/' 'nuxtfiles/' dist --recursive && replace '/assets/' 'nuxtfiles/' dist --recursive && replace '(src|\"src\")=\"/' '$1=\"../' dist --recursive && replace '(src|\"src\"):\"/' '$1:\"../' dist --recursive",
     "copy-cordova": "cp -R dist/* cordova/www/",
     "clear-cordova": "rm -R cordova/www/*",
-    "run-android": "cd cordova && cordova run android",
-    "run-ios": "cd cordova && cordova run ios"
+    "android": "cd cordova && cordova run android",
+    "ios": "cd cordova && cordova run ios"
   },
   "dependencies": {
     "firebase": "^7.6.2",

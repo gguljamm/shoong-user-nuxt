@@ -1,6 +1,6 @@
 <template>
   <div class="popup">
-    <section class="container" :class="{ active: init }">
+    <section class="container" :class="init ? 'active' : ''">
       <div class="header">
         <button @click="$router.back()"></button>
         <button @click="setUserNamePopup = true">닉변경</button>
@@ -44,6 +44,7 @@
         memberSocket: '',
         setUserNamePopup: false,
         init: false,
+        isScrollBottom: true,
       };
     },
     methods: {
@@ -65,8 +66,23 @@
         });
         this.inputText = '';
       },
+      scrollBottom() {
+        this.$refs.chatWrapper.scrollTo(0, this.$refs.chatWrapper.scrollHeight);
+      },
+      bodyScroll() {
+        this.isScrollBottom = window.document.documentElement.scrollTop + window.innerHeight === window.document.body.scrollHeight
+      },
+      keyboardChange() {
+        if (this.isScrollBottom) {
+          this.scrollBottom();
+        }
+      },
     },
     mounted() {
+      this.originSize = window.innerHeight;
+      // this.scrollPosition = window.pageYOffset;
+      // window.document.body.classList.add('disable-scroll');
+      // window.document.body.style.top = `-${this.scrollPosition}px`;
       this.$nextTick(() => {
         this.init = true;
       });
@@ -94,9 +110,7 @@
             user: v.user,
             text: v.text,
           });
-          this.$nextTick(() => {
-            this.$refs.chatWrapper.scrollTo(0, this.$refs.chatWrapper.scrollHeight);
-          });
+          this.$nextTick(this.scrollBottom);
         };
         this.chatSocket.limitToLast(50).on('child_added', cbDisplayMessages.bind(this));
       };
@@ -107,19 +121,26 @@
             init();
             clearInterval(interval);
           }
-        }, 100);
+        }, 500);
       } else {
         this.userKey = this.$store.state.userId;
         init();
       }
+      window.addEventListener('scroll', this.bodyScroll);
+      window.addEventListener('resize', this.keyboardChange);
     },
     beforeDestroy() {
+      // window.document.body.style.removeProperty('top');
+      // window.document.body.classList.remove('disable-scroll');
+      // window.scrollTo(0, this.scrollPosition);
       if (this.chatSocket) {
         this.chatSocket.off();
       }
       if (this.memberSocket) {
         this.memberSocket.off();
       }
+      window.removeEventListener('scroll', this.bodyScroll);
+      window.removeEventListener('resize', this.keyboardChange);
     },
   }
 </script>
@@ -129,17 +150,19 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
+  right: 0;
   background-color: rgba(0,0,0,.3);
+  overflow: hidden;
   z-index: 10;
   .container{
+    overflow: hidden;
     position: absolute;
     background-color: #FFF;
     top: 0;
     left: 0;
-    right: 0;
     bottom: 0;
+    right: 0;
     transform: translateX(100%);
     transition: .3s transform ease;
     &.active{
@@ -153,10 +176,10 @@
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
+      width: 100%;
       > button{
         position: absolute;
-        top: 0;
+        bottom: 0;
         width: 44px;
         height: 44px;
         background-repeat: no-repeat;
@@ -175,12 +198,12 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       position: absolute;
+      padding: 12px 12px 0;
       top: 44px;
       bottom: 44px;
       left: 0;
       right: 0;
       background-color: rgb(155, 202, 166);
-      padding: 12px 12px 0;
       .chatBox{
         margin-bottom: 10px;
         > div{
@@ -207,6 +230,7 @@
       right: 0;
       display: flex;
       background-color: #FFF;
+      height: 44px;
       > textarea{
         margin-top: 4px;
         margin-bottom: 4px;
