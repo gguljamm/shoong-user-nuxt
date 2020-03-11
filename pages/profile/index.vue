@@ -1,9 +1,14 @@
 <template>
-  <div></div>
+  <Home></Home>
 </template>
 
 <script>
+import Home from '~/components/profile/home';
+
 export default {
+  components: {
+    Home,
+  },
   data() {
     return {};
   },

@@ -115,6 +115,7 @@ export default {
     },
   },
   mounted() {
+    window.addEventListener('resize', this.scrollBottom);
     this.$nextTick(() => {
       this.init = true;
     });
@@ -165,6 +166,7 @@ export default {
     }
   },
   beforeDestroy() {
+    window.removeEventListener('resize', this.scrollBottom);
     if (this.timeout) {
       clearTimeout(this.timeout);
     }

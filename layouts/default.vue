@@ -27,7 +27,7 @@ export default {
     if (user) {
       this.$store.commit('setUserId', user);
     }
-    if (!user) {
+    if (!user && this.$route.path !== '/') {
       this.$router.replace('/');
     }
     this.$nextTick(() => {

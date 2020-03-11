@@ -8,7 +8,7 @@
       </h2>
       <div class="loginBox">
         <label for="emailLogin">이메일</label>
-        <input id="emailLogin" placeholder="이메일을 입력해주세요" v-model="email">
+        <input id="emailLogin" type="email" placeholder="이메일을 입력해주세요" v-model="email">
         <button class="submit" @click="submit()">{{ loading ? '로딩중' : '이메일로 시작하기' }}</button>
         <div class="sub">
           <button>비회원 둘러보기</button>
@@ -104,9 +104,11 @@ export default {
         console.log(this.ps);
         user.updatePassword(this.ps).then(() => {
           // Update successful.
-          this.$store.commit('setUserId', {
+          const obj = {
             uid: user.uid,
-          });
+          };
+          this.$store.commit('setUserId', obj);
+          this.$cookies.set('user', obj);
         }).catch((error) => {
           alert(error.message);
         });
@@ -122,9 +124,11 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((resp) => {
         this.loading = false;
         console.log(resp);
-        this.$store.commit('setUserId', {
+        const obj = {
           uid: resp.user.uid,
-        });
+        };
+        this.$store.commit('setUserId', obj);
+        this.$cookies.set('user', obj);
       }).catch((error) => {
         alert(error.message);
       });
