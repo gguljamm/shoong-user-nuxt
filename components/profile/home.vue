@@ -17,6 +17,7 @@ export default {
   methods: {
     setLang(lang) {
       this.$store.commit('SET_LANG', lang);
+      this.$cookies.set('locale', lang);
     },
   },
   mounted() {},
