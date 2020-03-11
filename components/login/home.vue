@@ -17,8 +17,11 @@
     </div>
     <template v-else-if="$route.path === '/login'">
       <div v-if="step === 'emailVerified'">
-
+        <div>이메일 전송완료</div>
+        <div>{{ email }}</div>
+        <div>입력하신 이메일로 확인메일을 보냈습니다. 확인 후, 로그인 가능합니다.</div>
         <div class="fixedBox">
+          <div>메일을 받지 못하신 경우 스팸메일함을 확인해주세요.</div>
           <button @click="emailValid()">OK</button>
         </div>
       </div>
