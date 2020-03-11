@@ -20,7 +20,7 @@
       </div>
       <div class="gra"></div>
       <div class="btnBottom">
-        <button @click="$router.replace($i18n.path(''))">OK</button>
+        <button @click="$router.replace('/')">OK</button>
       </div>
     </div>
   </transition>

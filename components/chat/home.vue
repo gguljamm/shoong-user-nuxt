@@ -10,9 +10,11 @@
         <div>Shoonger in Korea</div>
       </li>
     </ul>
-    <chat-room
-      v-if="$route.params.roomId === 'faq'"
-    ></chat-room>
+    <transition name="right-popup" mode="out-in">
+      <chat-room
+        v-if="$route.params.roomId === 'faq'"
+      ></chat-room>
+    </transition>
   </div>
 </template>
 

@@ -27,7 +27,7 @@ export default {
     if (user) {
       this.$store.commit('setUserId', user);
     }
-    if (!user) {
+    if (!user && this.$route.path !== '/') {
       this.$router.replace('/');
     }
     this.$nextTick(() => {
@@ -73,6 +73,13 @@ export default {
   }
   .slide-bottom-fade-enter, .slide-bottom-fade-leave-to{
     transform: translateY(500px);
+  }
+  .right-popup-enter-active, .right-popup-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .right-popup-enter, .right-popup-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    transform: translateX(50px);
+    opacity: 0;
   }
   /* VUE transitions */
 </style>

@@ -8,7 +8,7 @@
       </h2>
       <div class="loginBox">
         <label for="emailLogin">이메일</label>
-        <input id="emailLogin" placeholder="이메일을 입력해주세요" v-model="email">
+        <input id="emailLogin" type="email" placeholder="이메일을 입력해주세요" v-model="email">
         <button class="submit" @click="submit()">{{ loading ? '로딩중' : '이메일로 시작하기' }}</button>
         <div class="sub">
           <button>비회원 둘러보기</button>
@@ -17,8 +17,11 @@
     </div>
     <template v-else-if="$route.path === '/login'">
       <div v-if="step === 'emailVerified'">
-
+        <div>이메일 전송완료</div>
+        <div>{{ email }}</div>
+        <div>입력하신 이메일로 확인메일을 보냈습니다. 확인 후, 로그인 가능합니다.</div>
         <div class="fixedBox">
+          <div>메일을 받지 못하신 경우 스팸메일함을 확인해주세요.</div>
           <button @click="emailValid()">OK</button>
         </div>
       </div>
@@ -104,9 +107,12 @@ export default {
         console.log(this.ps);
         user.updatePassword(this.ps).then(() => {
           // Update successful.
-          this.$store.commit('setUserId', {
+          const obj = {
             uid: user.uid,
-          });
+            email: this.email,
+          };
+          this.$store.commit('setUserId', obj);
+          this.$cookies.set('user', obj);
         }).catch((error) => {
           alert(error.message);
         });
@@ -121,10 +127,12 @@ export default {
       this.loading = true;
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((resp) => {
         this.loading = false;
-        console.log(resp);
-        this.$store.commit('setUserId', {
+        const obj = {
           uid: resp.user.uid,
-        });
+          email: this.email,
+        };
+        this.$store.commit('setUserId', obj);
+        this.$cookies.set('user', obj);
       }).catch((error) => {
         alert(error.message);
       });

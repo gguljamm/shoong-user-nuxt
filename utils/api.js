@@ -13,6 +13,7 @@ function booking(bookObj) {
   formData.set('arrival', bookObj.arrival);
   formData.set('date', bookObj.date);
   formData.set('time', bookObj.time);
+  formData.set('userId', bookObj.userId);
   console.log(bookObj);
   if (bookObj.remark) {
     formData.set('remark', bookObj.remark);

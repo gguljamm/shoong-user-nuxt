@@ -31,8 +31,8 @@
         time: '',
         location: '',
         userInfo: {
-          email: '',
-          name: '',
+          email: this.$store.state.user.email,
+          name: this.$store.state.user && this.$store.state.user.name ? this.$store.state.user.name : '',
           headCount: '',
           remark: '',
         },
@@ -106,11 +106,12 @@
           date: this.moment(this.bookData.date).format('YYYY.MM.DD'),
           time: this.bookData.time,
           remark: this.bookData.userInfo.remark,
+          userId: this.$store.state.user.uid,
         };
         if (this.bookData.remark) {
           submitData.remark = this.bookData.remark;
         }
-        if (window.confirm(this.$t('store.confirm'))) {
+        if (window.confirm(this.$t('booking.confirm'))) {
           Api.booking(submitData).then(() => {
             this.success = true;
             this.$emit('success', submitData);
