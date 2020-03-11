@@ -66,4 +66,11 @@ export default {
     height: 100%;
     width: 100%;
   }
+  .right-popup-enter-active, .right-popup-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .right-popup-enter, .right-popup-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    transform: translateX(50px);
+    opacity: 0;
+  }
 </style>

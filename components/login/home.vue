@@ -109,6 +109,7 @@ export default {
           // Update successful.
           const obj = {
             uid: user.uid,
+            email: this.email,
           };
           this.$store.commit('setUserId', obj);
           this.$cookies.set('user', obj);
@@ -126,9 +127,9 @@ export default {
       this.loading = true;
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((resp) => {
         this.loading = false;
-        console.log(resp);
         const obj = {
           uid: resp.user.uid,
+          email: this.email,
         };
         this.$store.commit('setUserId', obj);
         this.$cookies.set('user', obj);
