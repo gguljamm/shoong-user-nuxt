@@ -66,4 +66,13 @@ export default {
     height: 100%;
     width: 100%;
   }
+  /* VUE transitions */
+  .slide-bottom-fade-enter-active,
+  .slide-bottom-fade-leave-active{
+    transition: all .3s ease;
+  }
+  .slide-bottom-fade-enter, .slide-bottom-fade-leave-to{
+    transform: translateY(500px);
+  }
+  /* VUE transitions */
 </style>
