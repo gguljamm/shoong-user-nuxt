@@ -1,12 +1,9 @@
 <template>
-  <chat-home></chat-home>
+  <div class="scrollable navi storeWrapper"></div>
 </template>
 
 <script>
-import chatHome from '~/components/chat/home';
-
 export default {
-  components: { chatHome },
   data() {
     return {};
   },

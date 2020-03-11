@@ -1,0 +1,88 @@
+{
+  "hello": "你好",
+  "main": {
+    "intro": "最方便<br>机场<br>专线巴士<br>服",
+    "localeTap": "- 敲打以改变语言",
+    "booking": "预订",
+    "csCenter": "客户中心"
+  },
+  "chat": {
+    "title": "客户服务",
+    "notice": "我们从上午10点到下午7点。",
+    "notice2": "如果你用英语或者",
+    "notice3": "用一种方便的语言来询问我们的话,",
+    "notice4": "我们就会回答。",
+    "answer": "一般20分钟内回答"
+  },
+  "bookingSuccess": {
+    "success": "预订成功",
+    "comment": "确定日程后用邮件告诉你。"
+  },
+  "booking": {
+    "confirm": "要预约输入的信息吗?",
+    "route": {
+      "title": "预订",
+      "from": "从机场到选择的位置",
+      "to": "从选择的位置到机场",
+      "serviceInputTitle": "选择服务",
+      "airportInputTitle": "机场选择",
+      "ICN1": "Incheon Airport Terminal 1",
+      "ICN2": "Incheon Airport Terminal 2",
+      "GMP": "Gimpo Airport"
+    },
+    "date": {
+      "title": "选择去机场的日期"
+    },
+    "time": {
+      "title": "时间选择",
+      "subTitle": "如果你选择时间,我们将把车分配给你,然后用电子邮件给你发正确的时间和地点",
+      "timeInputTitle": "预约时间",
+      "timeInputPlaceholder": "选择",
+      "timePop": {
+        "title": "选择登机时间",
+        "subTitle": "请选择至少在航班起飞<span class='bold'>前2小时</span>到达机场的时间。",
+        "infoTitle": "预约时间"
+      }
+    },
+    "location": {
+      "title": "位置选择",
+      "subTitle": "请写一下地方。<br>把车分配给你后,具体时间和地点将用电子邮件发给你。",
+      "inputPlaceholder": "景福宫,明洞,南山......"
+    },
+    "userInfo": {
+      "title": "补充信息",
+      "subTitle": "请准确输入你的电子邮件",
+      "emailInputTitle": "E-mail",
+      "emailInputPlaceholder": "ID@email.com",
+      "emailErr": "请输入有效邮箱",
+      "nameInputTitle": "名",
+      "nameInputPlaceholder": "Roy",
+      "companionsInputTitle": "人数",
+      "requestInputTitle": "要求事项",
+      "requestInputPlaceholder": "如有追加要求请输入。"
+    },
+    "checkData": {
+      "title": "请最后检查一下",
+      "info": {
+        "name": "名",
+        "date": "日期",
+        "time": "时间",
+        "from": "出发",
+        "to": "到达",
+        "companions": "人数",
+        "request": "要求事项"
+      },
+      "checkDataPop": {
+        "title": "请确认你的电子邮件",
+        "subTitle": "我们向你的电子邮件发送确认书。",
+        "yes": "YES",
+        "no": "NO"
+      }
+    }
+  },
+  "mail": {
+    "accept": "你的预约确定了。",
+    "cancel": "你的预约被取消了。",
+    "error": "已经确定或取消的预约。"
+  }
+}

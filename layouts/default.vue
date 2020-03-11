@@ -1,17 +1,19 @@
 <template>
-  <div class="nuxtWrapper" :class="['chat-ios-roomId', 'chat-aos-roomId'].indexOf($route.name) >= 0 ? 'hideNavi' : ''">
-    <nuxt v-if="init"/>
-    <Navigator></Navigator>
+  <div class="nuxtWrapper">
+    <nuxt v-if="init && $store.state.user.uid"/>
+    <Navigator v-if="$store.state.user.uid"></Navigator>
+    <Login v-if="init && !$store.state.user.uid"></Login>
   </div>
 </template>
 
 <script>
-import Firebase from 'firebase';
 import Navigator from '~/components/navigator.vue';
+import Login from '~/components/login/home.vue';
 
 export default {
   components: {
     Navigator,
+    Login,
   },
   data() {
     return {
@@ -19,57 +21,49 @@ export default {
     };
   },
   mounted() {
-    this.init = true;
-    Firebase.auth().signInAnonymously();
-    Firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.userId = user.uid;
-        this.$store.commit('setUserId', user.uid);
-      } else {
-        this.userId = '';
-      }
+    const lang = this.$cookies.get('locale') || 'en';
+    this.$store.commit('SET_LANG', lang);
+    const user = this.$cookies.get('user');
+    if (user) {
+      this.$store.commit('setUserId', user);
+    }
+    if (!user) {
+      this.$router.replace('/');
+    }
+    this.$nextTick(() => {
+      this.init = true;
     });
   },
 };
 </script>
 
 <style lang="scss">
-  html{
-    &.fixed{
-      overflow: hidden;
-      height: 100%;
-      width: 100%;
-      position: fixed;
-      body{
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        position: relative;
-      }
-    }
-  }
-  body{
-    /*background-color: rgb(243, 243, 243);*/
-    /*height: 100%;*/
-    /*&.disable-scroll {*/
-    /*  position: fixed;*/
-    /*  bottom:0;*/
-    /*  left:0;*/
-    /*  right:0;*/
-    /*  height: 100vh;*/
-    /*  overflow: hidden;*/
-    /*}*/
+  html, body{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
   }
   .nuxtWrapper{
-    padding-top: constant(safe-area-inset-top);
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: 44px;
-    padding-bottom: calc(constant(safe-area-inset-bottom) + 44px);
-    padding-bottom: calc(env(safe-area-inset-bottom) + 44px);
-    &.hideNavi{
-      padding-top: 0;
-      padding-bottom: 0;
+    height: 100%;
+  }
+  #__nuxt, #__layout{
+    height: 100%;
+    width: 100%;
+  }
+  .scrollable{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    &.navi{
+      padding-bottom: 44px;
+      padding-bottom: calc(constant(safe-area-inset-bottom) + 44px);
+      padding-bottom: calc(env(safe-area-inset-bottom) + 44px);
     }
   }
+  .tabWrapper{
+    height: 100%;
+    width: 100%;
+  }
 </style>
-

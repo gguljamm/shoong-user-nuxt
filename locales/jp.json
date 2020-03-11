@@ -1,0 +1,88 @@
+{
+  "hello": "こんにちは",
+  "main": {
+    "intro": "最も便利<br>空港<br>シャトルバス<br>奉公",
+    "localeTap": "- 言葉を変えるためにをタップする",
+    "booking": "予約する",
+    "csCenter": "お問い合わせ"
+  },
+  "chat": {
+    "title": "カスタマーサービス",
+    "notice": "午前10時から午後7時まで営業しています。",
+    "notice2": "英語または便利な言語でお",
+    "notice3": "問い合わせいただければ、",
+    "notice4": "お答えします。",
+    "answer": "普通20分以内返事"
+  },
+  "bookingSuccess": {
+    "success": "予約成功",
+    "comment": "日程がまとまったらメールでお知らせします。"
+  },
+  "booking": {
+    "confirm": "入力した情報で予約しますか?",
+    "route": {
+      "title": "予約する",
+      "to": "目的地から空港まで",
+      "from": "空港から目的地まで",
+      "serviceInputTitle": "サービスの選択",
+      "airportInputTitle": "空港を選択",
+      "ICN1": "Incheon Airport Terminal 1",
+      "ICN2": "Incheon Airport Terminal 2",
+      "GMP": "Gimpo Airport"
+    },
+    "date": {
+      "title": "空港に行く日を選ぶ"
+    },
+    "time": {
+      "title": "時間選択",
+      "subTitle": "時間帯を選んだら車を振り分けた後にEメールで正確な時間と場所を送ります。",
+      "timeInputTitle": "予約時間帯",
+      "timeInputPlaceholder": "選択",
+      "timePop": {
+        "title": "搭乗時間の選択",
+        "subTitle": "少なくとも飛行機の出発<span class='bold'>2時間前</span>に空港に到着する十分な時間を選択してください。",
+        "infoTitle": "予約時間"
+      }
+    },
+    "location": {
+      "title": "位置選択",
+      "subTitle": "場所を書いてください。 <br>配車後、正確な日時と場所をメールします。",
+      "inputPlaceholder": "景福宮、明洞、南山..."
+    },
+    "userInfo": {
+      "title": "追加情報",
+      "subTitle": "e-mailを正確に入力してください。",
+      "emailInputTitle": "E-mail",
+      "emailInputPlaceholder": "ID@email.com",
+      "emailErr": "有効なEメールを入力してください",
+      "nameInputTitle": "名前",
+      "nameInputPlaceholder": "Roy",
+      "companionsInputTitle": "人数",
+      "requestInputTitle": "要請事項",
+      "requestInputPlaceholder": "追加要請事項があれば、入力してください..."
+    },
+    "checkData": {
+      "title": "最後に確認<br>してください",
+      "info": {
+        "name": "名前",
+        "date": "日付",
+        "time": "時間",
+        "from": "出発",
+        "to": "到着",
+        "companions": "人数",
+        "request": "要請事項"
+      },
+      "checkDataPop": {
+        "title": "e-mailを確認します。。",
+        "subTitle": "確認のメールをお送りします。",
+        "yes": "はい",
+        "no": "いいえ"
+      }
+    }
+  },
+  "mail": {
+    "accept": "あなたの予約が確定しました。",
+    "cancel": "あなたの予約がキャンセルされました。",
+    "error": "すでに確定またはキャンセルされた予約です。"
+  }
+}

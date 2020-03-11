@@ -22,6 +22,7 @@ module.exports = {
   css: ['~/assets/css/normalize.css', 'assets/css/main.css'],
   plugins: [
     { src: '~/plugins/firebase.js', ssr: false },
+    { src: '~/plugins/cookies.js', ssr: false }
   ],
   buildDir: 'build',
   build: {
@@ -46,8 +47,15 @@ module.exports = {
       let parent = routes.find(route => route.path === '/chat')
       parent.children = [];
       parent.children.push({
-        name: 'chat-aos-roomId',
-        path: 'aos/:roomId',
+        name: 'chat-roomId',
+        path: ':roomId',
+        component: resolve(__dirname, 'components/modal.vue'),
+      });
+      parent = routes.find(route => route.path === '/')
+      parent.children = [];
+      parent.children.push({
+        name: 'index-login',
+        path: 'login',
         component: resolve(__dirname, 'components/modal.vue'),
       });
     },

@@ -1,5 +1,8 @@
 import Vue from 'vue';
-import * as Firebase from 'firebase';
+import * as Firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA0Fbj8fsbrrpfFaFArtWcpdy5xF8FhWuQ",
@@ -11,4 +14,4 @@ const firebaseConfig = {
   appId: "1:414911007240:web:dc7190fad3c1dc21e21fbd"
 };
 // Initialize Firebase
-Vue.prototype.firebase = Firebase.initializeApp(firebaseConfig).firebase_;
+Firebase.initializeApp(firebaseConfig).firebase_;
