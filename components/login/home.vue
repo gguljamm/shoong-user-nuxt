@@ -1,17 +1,19 @@
 <template>
-  <div class="scrollable loginWrapper">
+  <div class="scrollable loginWrapper" :class="$route.path === '/' ? 'main' : ''">
     <div v-if="$route.path === '/'">
+      <div class="logo"></div>
       <h1>로컬들이 즐기는<br>진짜 맛집, 진짜 볼거리</h1>
       <h2>
         슝은 로컬들이 즐기는 찐맛집과 놀거리, 볼거리들을<br>
         제공하는 서비스입니다.
       </h2>
-      <div class="loginBox">
-        <label for="emailLogin">이메일</label>
-        <input id="emailLogin" type="email" placeholder="이메일을 입력해주세요" v-model="email">
-        <button class="submit" @click="submit()">{{ loading ? '로딩중' : '이메일로 시작하기' }}</button>
-        <div class="sub">
-          <button>비회원 둘러보기</button>
+      <div class="fixBottom">
+        <div class="loginBox">
+          <input id="emailLogin" type="email" placeholder="이메일을 입력해주세요" v-model="email">
+          <button class="submit" @click="submit()">{{ loading ? '로딩중' : '이메일로 시작하기' }}</button>
+          <div class="sub">
+            <button>비회원 둘러보기</button>
+          </div>
         </div>
       </div>
     </div>
@@ -20,23 +22,29 @@
         <div>이메일 전송완료</div>
         <div>{{ email }}</div>
         <div>입력하신 이메일로 확인메일을 보냈습니다. 확인 후, 로그인 가능합니다.</div>
-        <div class="fixedBox">
-          <div>메일을 받지 못하신 경우 스팸메일함을 확인해주세요.</div>
-          <button @click="emailValid()">OK</button>
+        <div class="fixBottom">
+          <div class="fixedBox">
+            <div>메일을 받지 못하신 경우 스팸메일함을 확인해주세요.</div>
+            <button @click="emailValid()">OK</button>
+          </div>
         </div>
       </div>
       <div v-else-if="step === 'setPassword'">
         <input type="password" v-model="ps" class="ps first" placeholder="6자리 이상 비밀번호">
         <input type="password" v-model="psConfirm" class="ps" placeholder="비밀번호 재입력">
-        <div class="fixedBox">
-          <button @click="setPassword()">OK</button>
+        <div class="fixBottom">
+          <div class="fixedBox">
+            <button @click="setPassword()">OK</button>
+          </div>
         </div>
       </div>
       <div v-else-if="step === 'inputPassword'" class="inputPassword">
         <label for="inputPs">비밀번호 입력</label>
         <input id="inputPs" class="ps" type="password" v-model="password" placeholder="비밀번호를 입력하세요">
-        <div class="fixedBox">
-          <button @click="submitPs()">OK</button>
+        <div class="fixBottom">
+          <div class="fixedBox">
+            <button @click="submitPs()">OK</button>
+          </div>
         </div>
       </div>
     </template>
@@ -98,6 +106,10 @@ export default {
       this.$router.back();
     },
     setPassword() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
       if (this.ps === this.psConfirm) {
         if (this.ps === '000000') {
           alert('이 비번으론 안됨');
@@ -107,6 +119,7 @@ export default {
         console.log(this.ps);
         user.updatePassword(this.ps).then(() => {
           // Update successful.
+          this.loading = false;
           const obj = {
             uid: user.uid,
             email: this.email,
@@ -114,6 +127,7 @@ export default {
           this.$store.commit('setUserId', obj);
           this.$cookies.set('user', obj);
         }).catch((error) => {
+          this.loading = false;
           alert(error.message);
         });
       } else {
@@ -134,6 +148,7 @@ export default {
         this.$store.commit('setUserId', obj);
         this.$cookies.set('user', obj);
       }).catch((error) => {
+        this.loading = false;
         alert(error.message);
       });
     },
@@ -146,7 +161,21 @@ export default {
   .loginWrapper{
     position: absolute;
     width: 100%;
-    background-color: rgb(248, 249, 251);
+    background-color: #f8f9fb;
+    &.main{
+      background-color: rgb(151,151,151);
+    }
+    .logo{
+      width: 102px;
+      height: 43px;
+      background-image: url(~assets/img/logo-white.png);
+      background-size: cover;
+      position: absolute;
+      top: 44px;
+      left: 24px;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
     > div{
       padding-left: 24px;
       padding-right: 24px;
@@ -157,25 +186,23 @@ export default {
       font-size: 30px;
       text-align: center;
       padding-top: 132px;
-      font-weight: normal;
+      font-weight: bold;
       line-height: 36px;
+      color: #FFF;
     }
     h2{
       padding: 0;
       margin: 0;
-      margin-top: 14px;
+      margin-top: 10px;
       text-align: center;
       font-size: 14px;
-      color: rgb(147, 148, 153);
+      color: #FFF;
       font-weight: normal;
       line-height: 17px;
     }
     .loginBox{
-      position: absolute;
-      bottom: 0;
-      left: 0;
       width: 100%;
-      padding: 0 30px 35px;
+      padding: 0 21px 22px;
       label{
         display: block;
         margin-bottom: 8px;
@@ -183,23 +210,23 @@ export default {
       }
       input {
         display: block;
-        height: 62px;
+        height: 55px;
         width: 100%;
-        border: 1px solid rgb(0, 102, 245);
+        border: 1px solid rgb(204, 205, 209);
         background-color: #FFF;
-        border-radius: 10px;
+        border-radius: 6px;
         padding: 0 28px;
       }
       button.submit{
-        border-radius: 31px;
+        border-radius: 6px;
         width: 100%;
-        height: 62px;
+        height: 55px;
         background-color: #ff4208;
         color: #FFF;
-        margin-top: 14px;
+        margin-top: 10px;
       }
       .sub{
-        margin-top: 14px;
+        margin-top: 21px;
         font-size: 14px;
         text-align: center;
         > button{
@@ -208,10 +235,6 @@ export default {
       }
     }
     .fixedBox{
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
       padding: 0 21px 22px;
       > button{
         width: 100%;
@@ -240,12 +263,6 @@ export default {
       display: block;
       padding-top: 115px;
       margin-bottom: 8px;
-    }
-  }
-  @media screen and (max-height: 540px) {
-    .loginWrapper .loginBox{
-      position: relative;
-      padding-top: 40px;
     }
   }
 </style>

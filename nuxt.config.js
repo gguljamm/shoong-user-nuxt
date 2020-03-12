@@ -44,18 +44,28 @@ module.exports = {
   router: {
     mode: 'hash',
     extendRoutes(routes, resolve) {
-      let parent = routes.find(route => route.path === '/chat')
-      parent.children = [];
-      parent.children.push({
-        name: 'chat-roomId',
-        path: ':roomId',
-        component: resolve(__dirname, 'components/modal.vue'),
-      });
-      parent = routes.find(route => route.path === '/')
+      let parent = routes.find(route => route.path === '/')
       parent.children = [];
       parent.children.push({
         name: 'index-login',
         path: 'login',
+        component: resolve(__dirname, 'components/modal.vue'),
+      });
+      parent.children.push({
+        name: 'index-feedId',
+        path: ':feedId',
+        component: resolve(__dirname, 'components/modal.vue'),
+        children: [{
+          name: 'index-feedId-deepId',
+          path: ':deepId',
+          component: resolve(__dirname, 'components/modal.vue'),
+        }],
+      });
+      parent = routes.find(route => route.path === '/chat')
+      parent.children = [];
+      parent.children.push({
+        name: 'chat-roomId',
+        path: ':roomId',
         component: resolve(__dirname, 'components/modal.vue'),
       });
     },

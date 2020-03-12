@@ -1,24 +1,44 @@
 <template>
-  <div class="scrollable navi feedWrapper">
-    <div class="header"></div>
-    <ul class="">
-      <li v-for="x in 10" :key="x">
-        <div>카페투어</div>
-        <div>
-          <div>숨어있는<br>힙지로 갬성카페</div>
+  <div class="feedWrapper">
+    <div class="fixTop">
+      <div class="header">
+        <button>검색</button>
+        <button>추천</button>
+        <button>최신</button>
+        <button>필터</button>
+      </div>
+    </div>
+    <div class="scrollable navi">
+      <ul class="content">
+        <li v-for="x in 10" :key="x" @click="$router.push({ path: `/${x}` })">
+          <div>카페투어</div>
           <div>
-            <span>#힙지로</span>
-            <span>#뉴트로갬성</span>
-            <span>#카페</span>
+            <div>숨어있는<br>힙지로 갬성카페</div>
+            <div>
+              <span>#힙지로</span>
+              <span>#뉴트로갬성</span>
+              <span>#카페</span>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
+    <transition name="right-popup" mode="out-in">
+      <feed-content v-if="$route.params.feedId"></feed-content>
+      <feed-detail-content v-if="$route.params.feedDetailId"></feed-detail-content>
+    </transition>
   </div>
 </template>
 
 <script>
+import feedContent from './feedContent';
+import feedDetailContent from './feedDetailContent';
+
 export default {
+  components: {
+    feedContent,
+    feedDetailContent,
+  },
   data() {
     return {};
   },
@@ -29,17 +49,20 @@ export default {
 
 <style lang="scss" scoped>
   .feedWrapper{
+    height: 100%;
     background-color: rgb(248, 249, 251);
-    .header{
-      position: absolute;
-      top: 0;
-      height: 44px;
-      left: 0;
-      width: 100%;
+    .fixTop{
       background-color: rgb(248, 249, 251);
       z-index: 5;
+      .header{
+        display: flex;
+        height: 44px;
+        > button{
+          flex: 0 0 25%;
+        }
+      }
     }
-    > ul{
+    .scrollable > ul{
       padding: 70px 20px 20px;
       > li{
         cursor: pointer;
@@ -49,8 +72,13 @@ export default {
         height: 464px;
         border: 1px solid rgb(151,151,151);
         border-radius: 15px;
-        background-color: rgb(216,216,216);
         position: relative;
+        background-image: url(~assets/img/cafe.jpg);
+        background-size: cover;
+        background-position: center center;
+        &:nth-child(even) {
+          background-image: url(~assets/img/cafe2.jpg);
+        }
         &:last-of-type{
           margin-bottom: 0;
         }
