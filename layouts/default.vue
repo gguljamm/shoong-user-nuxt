@@ -86,6 +86,14 @@ export default {
     height: 100%;
     width: 100%;
   }
+  /* VUE transitions */
+  .slide-bottom-fade-enter-active,
+  .slide-bottom-fade-leave-active{
+    transition: all .3s ease;
+  }
+  .slide-bottom-fade-enter, .slide-bottom-fade-leave-to{
+    transform: translateY(500px);
+  }
   .right-popup-enter-active, .right-popup-leave-active {
     transition: all .3s cubic-bezier(1.0, 1.0, 0.2, 0.2);
   }
@@ -93,4 +101,5 @@ export default {
     transform: translateX(50px);
     opacity: 0;
   }
+  /* VUE transitions */
 </style>
