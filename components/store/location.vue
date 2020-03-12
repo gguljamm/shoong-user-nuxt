@@ -14,7 +14,7 @@
         <input type="text" v-bind:value="location" v-on:input="location = $event.target.value" class="locationInput" :placeholder="$t('booking.location.inputPlaceholder')">
       </div>
     </div>
-    <div class="btnBottom">
+    <div v-if="isValidBtn" class="btnBottom">
       <button @click="location ? saveLocation() : ''" :class="location ? 'active' : ''">NEXT</button>
     </div>
   </div>
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  props: ['bookData'],
+  props: ['bookData', 'isValidBtn'],
   data() {
     const location = this.bookData && this.bookData.location;
     return {

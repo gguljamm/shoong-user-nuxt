@@ -2,6 +2,7 @@
   <div class="bookWrapper scrollable">
     <div v-if="!messagePopFlag">
       <book
+        @changePage="changePage"
         @success="openMessage"
       ></book>
     </div>
@@ -50,14 +51,15 @@
         this.bookData = bookData;
         this.messagePopFlag = true;
       },
+      changePage(page) {
+        this.$emit('changePage', page);
+      },
     },
   };
 </script>
 
 <style lang="scss">
   .bookWrapper{
-    min-height: 100%;
-    -webkit-overflow-scrolling: touch;
     .header{
       z-index: 2;
       background-color: #FFF;

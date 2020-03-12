@@ -6,6 +6,7 @@
     <component
       :is="componentInstance"
       :bookData="bookData"
+      :isValidBtn="isValidBtn"
       @setData="receiveData"
       @changePage="changePage"
       @backStep="backStep"
@@ -44,7 +45,6 @@
         isValidBtn: true,
         windowWidth: 0,
         windowHeight: 0,
-        isWeekend: false,
         stepsList: ['route', 'date', 'time', 'location', 'userInfo', 'checkData'],
         steps: 'route',
         bookData,
@@ -66,7 +66,7 @@
         if (previous) {
           this.steps = previous;
         } else {
-          this.$router.back();
+          this.$emit('changePage', 'home');
         }
       },
       receiveData(data) {
@@ -122,8 +122,6 @@
       },
     },
     async mounted() {
-      const server = await Api.getServer(); // 현재 날짜 가져오기 자기 자신한테 api 날림
-      this.isWeekend = moment(server.headers.date).weekday() === 0 || moment(server.headers.date).weekday() === 6;
       this.$nextTick(() => {
         this.windowHeight = window.innerHeight;
         this.windowWidth = window.innerWidth;

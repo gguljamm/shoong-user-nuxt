@@ -42,7 +42,7 @@
         </textarea>
       </div>
     </div>
-    <div class="btnBottom">
+    <div v-if="isValidBtn" class="btnBottom">
       <button @click="active ? saveLocation() : ''" :class="active ? 'active' : ''">NEXT</button>
     </div>
   </div>
@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  props: ['bookData'],
+  props: ['bookData', 'isValidBtn'],
   data() {
     const email = this.bookData && this.bookData.userInfo.email;
     const name = this.bookData && this.bookData.userInfo.name;
