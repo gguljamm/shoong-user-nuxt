@@ -56,11 +56,31 @@ export default {
     overflow-y: auto;
     height: 100%;
     -webkit-overflow-scrolling: touch;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
     &.navi{
       padding-bottom: 44px;
       padding-bottom: calc(constant(safe-area-inset-bottom) + 44px);
       padding-bottom: calc(env(safe-area-inset-bottom) + 44px);
     }
+  }
+  .fixBottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .fixTop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
   }
   .tabWrapper{
     height: 100%;
@@ -75,7 +95,7 @@ export default {
     transform: translateY(500px);
   }
   .right-popup-enter-active, .right-popup-leave-active {
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all .3s cubic-bezier(1.0, 1.0, 0.2, 0.2);
   }
   .right-popup-enter, .right-popup-leave-to /* .fade-leave-active below version 2.1.8 */ {
     transform: translateX(50px);
