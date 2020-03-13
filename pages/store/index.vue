@@ -1,23 +1,22 @@
 <template>
-  <div class="nuxtWrapper">
-    <home
-      v-if="page === 'home'"
-      @changePage="changePage"
-    ></home>
-    <bookControl
-      v-else
-    ></bookControl>
-  </div>
+  <home
+    v-if="page === 'home'"
+    @changePage="changePage"
+  ></home>
+  <book-control
+    v-else
+    @changePage="changePage"
+  ></book-control>
 </template>
 
 <script>
 import home from '~/components/store/home.vue';
-import bookControl from '~/components/store/bookControl.vue';
+import BookControl from '~/components/store/bookControl.vue';
 
 export default {
   components: {
     home,
-    bookControl,
+    BookControl,
   },
   data() {
     return {
