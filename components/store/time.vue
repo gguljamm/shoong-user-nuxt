@@ -1,7 +1,9 @@
 <template>
   <div class="timeWrap">
-    <div class="header">
-      <button @click="$emit('backStep')"></button>
+    <div class="fixTop">
+      <div class="header">
+        <button @click="$emit('backStep')"></button>
+      </div>
     </div>
     <div class="serviceTitle">
       <div class="intro">
@@ -20,33 +22,34 @@
     </div>
     <div v-if="pickerOn" class="mask" @click="closePop"></div>
     <transition name="slide-bottom-fade" mode="out-in">
-      <div
-        v-if="pickerOn"
-        class="selectTime"
-      >
-        <div class="topInfo"><button @click="closePop"></button></div>
-        <div class="info">
-          <div class="title">{{ $t('booking.time.timePop.title') }}</div>
-          <div class="sub" v-html="$t('booking.time.timePop.subTitle')"></div>
-        </div>
-        <timePicker
-          :selectedTime="selectTime"
-          @changeData="saveTime"
-        ></timePicker>
-        <div
-          v-if="bookData && bookData.date && selectTime"
-          class="timeInfo"
-        >
-          <div class="title">{{ $t('booking.time.timePop.infoTitle') }}</div>
-          <div class="day">{{ moment(bookData.date).format('ll ddd') }}, {{ selectTime }}</div>
-        </div>
-        <div class="btnBottomPop">
-          <button @click="closePop">OK</button>
+      <div v-if="pickerOn" class="fixBottom popup-zIndex">
+        <div class="selectTime">
+          <div class="topInfo"><button @click="closePop"></button></div>
+          <div class="info">
+            <div class="title">{{ $t('booking.time.timePop.title') }}</div>
+            <div class="sub" v-html="$t('booking.time.timePop.subTitle')"></div>
+          </div>
+          <timePicker
+            :selectedTime="selectTime"
+            @changeData="saveTime"
+          ></timePicker>
+          <div
+            v-if="bookData && bookData.date && selectTime"
+            class="timeInfo"
+          >
+            <div class="title">{{ $t('booking.time.timePop.infoTitle') }}</div>
+            <div class="day">{{ moment(bookData.date).format('ll ddd') }}, {{ selectTime }}</div>
+          </div>
+          <div class="btnBottomPop">
+            <button @click="closePop">OK</button>
+          </div>
         </div>
       </div>
     </transition>
-    <div class="btnBottom">
-      <button :class="selectTime ? 'active' : ''" @click="selectTime ? submit() : openPop()">NEXT</button>
+    <div class="fixBottom">
+      <div class="pageBottomBtnWrap">
+        <button :class="selectTime ? 'active' : ''" @click="selectTime ? submit() : openPop()">NEXT</button>
+      </div>
     </div>
   </div>
 </template>
@@ -107,6 +110,9 @@ export default {
 <style lang="scss" scoped>
   .timeWrap{
     padding: 22px 16px 120px 16px;
+    .popup-zIndex{
+      z-index: 3;
+    }
     .fixed{
       position: fixed;
       overflow: hidden;
@@ -181,12 +187,10 @@ export default {
       background-color: rgba(0, 0, 0, 0.39);
     }
     .selectTime {
+      width: 100%;
       z-index: 3;
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 44px;
       background-color: #fff;
+      margin-bottom: 44px;
       padding-bottom: 22px;
 
       .topInfo {
@@ -240,34 +244,13 @@ export default {
         }
       }
       .btnBottomPop{
-        margin: 22px 21px 0 21px;
+        padding: 22px 21px 0 21px;
         button{
           width: 100%;
           height: 55px;
           border-radius: 6px;
           font-weight: bold;
           color: #fff;
-          background-color: #ff4208;
-        }
-      }
-    }
-    .btnBottom{
-      position: fixed;
-      width: 100%;
-      height: 95px;
-      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff 50%);
-      padding: 22px 21px;
-      left: 0;
-      right: 0;
-      bottom: 44px;
-      button{
-        width: 100%;
-        height: 55px;
-        border-radius: 6px;
-        color: #fff;
-        font-weight: bold;
-        background-color: #e7b6a7;
-        &.active{
           background-color: #ff4208;
         }
       }

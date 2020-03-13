@@ -1,7 +1,9 @@
 <template>
   <div class="routeWrap">
-    <div class="header">
-      <button @click="$emit('backStep')"></button>
+    <div class="fixTop">
+      <div class="header">
+        <button @click="$emit('backStep')"></button>
+      </div>
     </div>
     <div class="serviceTitle">
       <div class="intro">
@@ -33,8 +35,10 @@
         </div>
       </div>
     </div>
-    <div class="btnWrap">
-      <button @click="submit">NEXT</button>
+    <div class="fixBottom">
+      <div class="pageBottomBtnWrap">
+        <button @click="submit" class="active">NEXT</button>
+      </div>
     </div>
   </div>
 </template>
@@ -122,24 +126,6 @@ export default {
           color: #000;
           padding: 20px;
         }
-      }
-    }
-    .btnWrap{
-      position: fixed;
-      width: 100%;
-      height: 95px;
-      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff 50%);
-      padding: 22px 21px;
-      left: 0;
-      right: 0;
-      bottom: 44px;
-      button{
-        width: 100%;
-        height: 55px;
-        border-radius: 6px;
-        color: #fff;
-        font-weight: bold;
-        background-color: #ff4208;
       }
     }
   }

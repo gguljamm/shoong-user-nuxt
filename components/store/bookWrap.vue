@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="init"
-    class="bookingControlWrap storeWrapper"
+    class="bookingControlWrap"
   >
     <component
       :is="componentInstance"

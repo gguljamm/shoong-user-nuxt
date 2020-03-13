@@ -1,7 +1,9 @@
 <template>
-  <div class="dateWrap">
-    <div class="header">
-      <button @click="$emit('backStep')"></button>
+  <div class="dateWrap scrollable">
+    <div class="fixTop">
+      <div class="header">
+        <button @click="$emit('backStep')"></button>
+      </div>
     </div>
     <div class="title">
       <div class="intro" v-html="$t('booking.date.title')"></div>
@@ -43,8 +45,10 @@
         </div>
       </div>
     </div>
-    <div class="btnWrap">
-      <button @click="selectDate ? submit() : ''" :class="selectDate ? 'active' : ''">NEXT</button>
+    <div class="fixBottom">
+      <div class="pageBottomBtnWrap">
+        <button @click="selectDate ? submit() : ''" :class="selectDate ? 'active' : ''">NEXT</button>
+      </div>
     </div>
   </div>
 </template>
@@ -197,28 +201,6 @@ export default {
               }
             }
           }
-        }
-      }
-    }
-    .btnWrap{
-      position: fixed;
-      width: 100%;
-      height: 95px;
-      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff 50%);
-      padding: 22px 21px;
-      left: 0;
-      right: 0;
-      bottom: 44px;
-      button{
-        transition: .3s ease;
-        width: 100%;
-        height: 55px;
-        border-radius: 6px;
-        color: #fff;
-        font-weight: bold;
-        background-color: #e7b6a7;
-        &.active{
-          background-color: #ff4208;
         }
       }
     }

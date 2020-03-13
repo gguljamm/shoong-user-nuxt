@@ -1,7 +1,9 @@
 <template>
   <div class="locationWrap">
-    <div class="header">
-      <button @click="$emit('backStep')"></button>
+    <div class="fixTop">
+      <div class="header">
+        <button @click="$emit('backStep')"></button>
+      </div>
     </div>
     <div class="serviceTitle">
       <div class="intro">
@@ -14,8 +16,10 @@
         <input type="text" v-bind:value="location" v-on:input="location = $event.target.value" class="locationInput" :placeholder="$t('booking.location.inputPlaceholder')">
       </div>
     </div>
-    <div v-if="isValidBtn" class="btnBottom">
-      <button @click="location ? saveLocation() : ''" :class="location ? 'active' : ''">NEXT</button>
+    <div class="fixBottom">
+      <div v-if="isValidBtn" class="pageBottomBtnWrap">
+        <button @click="location ? saveLocation() : ''" :class="location ? 'active' : ''">NEXT</button>
+      </div>
     </div>
   </div>
 </template>
@@ -73,28 +77,6 @@ export default {
           &::placeholder{
             color: #939499;
           }
-        }
-      }
-    }
-    .btnBottom{
-      position: fixed;
-      width: 100%;
-      height: 95px;
-      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff 50%);
-      padding: 22px 21px;
-      left: 0;
-      right: 0;
-      bottom: 44px;
-      button{
-        transition: .3s ease;
-        width: 100%;
-        height: 55px;
-        border-radius: 6px;
-        font-weight: bold;
-        color: #fff;
-        background-color: #e7b6a7;
-        &.active{
-          background-color: #ff4208;
         }
       }
     }
