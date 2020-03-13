@@ -153,7 +153,9 @@ export default {
       });
     },
   },
-  mounted() {},
+  mounted() {
+    this.$bodyLock.lock();
+  },
 };
 </script>
 

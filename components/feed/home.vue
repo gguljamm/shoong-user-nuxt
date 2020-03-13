@@ -8,7 +8,7 @@
         <button>필터</button>
       </div>
     </div>
-    <div class="scrollable navi">
+    <div class="scrollable navi" ref="scrollable">
       <ul class="content">
         <li v-for="x in 10" :key="x" @click="$router.push({ path: `/${x}` })">
           <div>카페투어</div>
@@ -43,7 +43,9 @@ export default {
     return {};
   },
   methods: {},
-  mounted() {},
+  mounted() {
+    this.$bodyLock.lock();
+  },
 };
 </script>
 

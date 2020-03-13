@@ -1,8 +1,10 @@
 <template>
   <section class="chatRoomWrapper">
-    <div class="header">
-      <button @click="$router.back()"></button>
-      {{ $t('chat.title') }}
+    <div class="fixTop">
+      <div class="header">
+        <button @click="$router.back()"></button>
+        {{ $t('chat.title') }}
+      </div>
     </div>
     <ul ref="chatWrapper" class="scrollable">
       <div v-if="loading" class="loader">loading</div>
@@ -22,9 +24,11 @@
         </div>
       </li>
     </ul>
-    <div class="inputBox">
-      <textarea v-model="inputText" placeholder="Message"></textarea>
-      <button @click="chatSubmit()" :style="{ opacity: inputText.length > 0 ? 1 : 0 }"></button>
+    <div class="fixBottom">
+      <div class="inputBox">
+        <textarea v-model="inputText" placeholder="Message"></textarea>
+        <button @click="chatSubmit()" :style="{ opacity: inputText.length > 0 ? 1 : 0 }"></button>
+      </div>
     </div>
   </section>
 </template>
@@ -185,32 +189,31 @@ export default {
     z-index: 20;
     width: 100%;
     height: 100%;
-    .header{
-      line-height: 44px;
-      box-shadow: 0 0 2px 1px rgba(0,0,0,.3);
+    .fixTop{
       z-index: 10;
       background-color: #000;
-      color: #FFF;
-      height: 44px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      > button{
-        position: absolute;
-        bottom: 0;
-        width: 44px;
+      box-shadow: 0 0 2px 1px rgba(0,0,0,.3);
+      .header{
+        line-height: 44px;
+        color: #FFF;
         height: 44px;
-        background-repeat: no-repeat;
-        background-position: center center;
-        &:nth-of-type(1){
-          background-image: url(~assets/img/chevron-left-white.svg);
-          left: 0;
-        }
-        &:nth-of-type(2){
-          right: 0;
-          font-size: 12px;
+        width: 100%;
+        text-align: center;
+        > button{
+          position: absolute;
+          bottom: 0;
+          width: 44px;
+          height: 44px;
+          background-repeat: no-repeat;
+          background-position: center center;
+          &:nth-of-type(1){
+            background-image: url(~assets/img/chevron-left-white.svg);
+            left: 0;
+          }
+          &:nth-of-type(2){
+            right: 0;
+            font-size: 12px;
+          }
         }
       }
     }
@@ -298,41 +301,39 @@ export default {
         }
       }
     }
-    .inputBox{
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+    .fixBottom{
       z-index: 1;
-      height: 63px;
       background-color: #ffffff;
-      padding: 10px 21px;
-      textarea{
-        padding-top: 11px;
-        padding-left: 16px;
-        padding-right: 39px;
-        padding-bottom: 5px;
-        -webkit-user-modify: read-write-plaintext-only;
-        height: 43px;
-        border-radius: 27.5px;
-        border: solid 1px #cccdd1;
-        background-color: #ffffff;
-        width: 100%;
-        resize: none;
-      }
-      > button{
-        transition: .1s ease;
-        position: absolute;
-        top: 14px;
-        right: 25px;
-        width: 35px;
-        height: 35px;
-        border-radius: 100%;
-        background-color: #ff4208;
-        background-image: url(~assets/img/arrow-right-white.svg);
-        background-position: center center;
-        background-size: 22px;
-        background-repeat: no-repeat;
+      .inputBox{
+        height: 63px;
+        padding: 10px 21px;
+        textarea{
+          padding-top: 11px;
+          padding-left: 16px;
+          padding-right: 39px;
+          padding-bottom: 5px;
+          -webkit-user-modify: read-write-plaintext-only;
+          height: 43px;
+          border-radius: 27.5px;
+          border: solid 1px #cccdd1;
+          background-color: #ffffff;
+          width: 100%;
+          resize: none;
+        }
+        > button{
+          transition: .1s ease;
+          position: absolute;
+          top: 14px;
+          right: 25px;
+          width: 35px;
+          height: 35px;
+          border-radius: 100%;
+          background-color: #ff4208;
+          background-image: url(~assets/img/arrow-right-white.svg);
+          background-position: center center;
+          background-size: 22px;
+          background-repeat: no-repeat;
+        }
       }
     }
   }

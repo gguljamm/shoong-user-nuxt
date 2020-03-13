@@ -22,7 +22,8 @@ module.exports = {
   css: ['~/assets/css/normalize.css', 'assets/css/main.css'],
   plugins: [
     { src: '~/plugins/firebase.js', ssr: false },
-    { src: '~/plugins/cookies.js', ssr: false }
+    { src: '~/plugins/cookies.js', ssr: false },
+    { src: '~/plugins/body-scroll-lock.js', ssr: false }
   ],
   buildDir: 'build',
   build: {

@@ -1,12 +1,14 @@
 <template>
-  <div class="scrollable navi profileWrapper" style="padding: 20px;">
-    {{ $t('main.localeTap') }}
-    <div class="temp">
-      <button @click="setLang('en')" :disabled="$store.state.locale === 'en'">en</button>
-      <button @click="setLang('cn')" :disabled="$store.state.locale === 'cn'">cn</button>
-      <button @click="setLang('jp')" :disabled="$store.state.locale === 'jp'">jp</button>
+  <div class="scrollable navi">
+    <div class="profileWrapper" style="padding: 20px;">
+      {{ $t('main.localeTap') }}
+      <div class="temp">
+        <button @click="setLang('en')" :disabled="$store.state.locale === 'en'">en</button>
+        <button @click="setLang('cn')" :disabled="$store.state.locale === 'cn'">cn</button>
+        <button @click="setLang('jp')" :disabled="$store.state.locale === 'jp'">jp</button>
+      </div>
+      <button @click="logout()" style="width: 100%; background-color: #ff4208; color: #FFF; margin-top: 40px; line-height: 40px;">log out</button>
     </div>
-    <button @click="logout()" style="width: 100%; background-color: #ff4208; color: #FFF; margin-top: 40px; line-height: 40px;">log out</button>
   </div>
 </template>
 
@@ -28,7 +30,9 @@ export default {
       }
     },
   },
-  mounted() {},
+  mounted() {
+    this.$bodyLock.lock();
+  },
 };
 </script>
 

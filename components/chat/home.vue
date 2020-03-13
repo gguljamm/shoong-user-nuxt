@@ -31,7 +31,9 @@ export default {
       this.$router.push('/chat/faq');
     },
   },
-  mounted() {},
+  mounted() {
+    this.$bodyLock.lock();
+  },
 };
 </script>
 

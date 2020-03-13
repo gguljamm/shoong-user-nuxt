@@ -18,6 +18,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -31,6 +32,7 @@ export default {
     },
   },
   mounted() {
+    this.$bodyLock.lock();
     this.$refs.feedContentWrapper.addEventListener('scroll', this.scroll);
   },
   beforeDestroy() {
@@ -87,9 +89,7 @@ export default {
           background-position: center center;
           background-size: 24px;
           background-repeat: no-repeat;
-          position: absolute;
-          left: 0;
-          top: 0;
+          float: left;
           width: 44px;
           height: 44px;
           background-color: transparent;
