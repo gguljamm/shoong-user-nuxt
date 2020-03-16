@@ -14,7 +14,7 @@ function booking(bookObj) {
   formData.set('date', bookObj.date);
   formData.set('time', bookObj.time);
   formData.set('userId', bookObj.userId);
-  console.log(bookObj);
+  // console.log(bookObj);
   if (bookObj.remark) {
     formData.set('remark', bookObj.remark);
   }
