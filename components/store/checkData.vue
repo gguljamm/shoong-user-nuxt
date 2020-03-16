@@ -5,22 +5,24 @@
         <button @click="$emit('backStep')"></button>
       </div>
     </div>
-    <div class="serviceTitle">
-      <div class="intro" v-html="$t('booking.checkData.title')"></div>
-    </div>
-    <div class="contentWrap">
-      <div
-        v-for="(keyName, index) in Object.keys(checkData)"
-        :key="index"
-        class="info"
-        :class="keyName"
-      >
+    <div class="checkDataBodyWrap">
+      <div class="serviceTitle">
+        <div class="intro" v-html="$t('booking.checkData.title')"></div>
+      </div>
+      <div class="contentWrap">
         <div
-          v-if="checkData[keyName]"
-          class="infoWrap"
+          v-for="(keyName, index) in Object.keys(checkData)"
+          :key="index"
+          class="info"
+          :class="keyName"
         >
-          <div class="name">{{ $t(`booking.checkData.info.${keyName}`) }}</div>
-          <div class="val">{{ checkData[keyName] }}</div>
+          <div
+            v-if="checkData[keyName]"
+            class="infoWrap"
+          >
+            <div class="name">{{ $t(`booking.checkData.info.${keyName}`) }}</div>
+            <div class="val">{{ checkData[keyName] }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -106,44 +108,46 @@ export default {
 
 <style lang="scss" scoped>
   .checkDataWrap{
-    padding: 22px 16px 120px 16px;
     .popup-zIndex{
       z-index: 3;
     }
-    .serviceTitle{
-      .intro{
-        font-size: 30px;
-        font-weight: bold;
-        line-height: 39px;
-        color: #000;
-      }
-    }
-    .contentWrap {
-      margin-top: 30px;
-      .info{
-        margin-top: 30px;
-        font-size: 16px;
-        &:first-of-type{
-          margin-top: 0;
+    .checkDataBodyWrap{
+      padding: 22px 16px 120px 16px;
+      .serviceTitle{
+        .intro{
+          font-size: 30px;
+          font-weight: bold;
+          line-height: 39px;
+          color: #000;
         }
-        .infoWrap{
-          display: flex;
-          .name{
-            width: 50%;
-            color: #939499;
+      }
+      .contentWrap {
+        margin-top: 30px;
+        .info{
+          margin-top: 30px;
+          font-size: 16px;
+          &:first-of-type{
+            margin-top: 0;
           }
-          .val{
-            width: 50%;
-            color: #000;
-            font-weight: bold;
-          }
-          &.request{
-            display: block;
-            .name, .val{
-              width: 100%;
+          .infoWrap{
+            display: flex;
+            .name{
+              width: 50%;
+              color: #939499;
             }
             .val{
-              margin-top: 10px;
+              width: 50%;
+              color: #000;
+              font-weight: bold;
+            }
+            &.request{
+              display: block;
+              .name, .val{
+                width: 100%;
+              }
+              .val{
+                margin-top: 10px;
+              }
             }
           }
         }

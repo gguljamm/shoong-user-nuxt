@@ -5,18 +5,20 @@
         <button @click="$emit('backStep')"></button>
       </div>
     </div>
-    <div class="serviceTitle">
-      <div class="intro">
-        {{ $t('booking.time.title') }}
+    <div class="timeBodyWrap">
+      <div class="serviceTitle">
+        <div class="intro">
+          {{ $t('booking.time.title') }}
+        </div>
+        <div class="sub" v-html="$t('booking.time.subTitle')"></div>
       </div>
-      <div class="sub" v-html="$t('booking.time.subTitle')"></div>
-    </div>
-    <div class="contentWrap">
-      <div class="content">
-        <div class="title">{{ $t('booking.time.timeInputTitle') }}</div>
-        <div class="selectWrap" @click="openPop">
-          <input type="text" readonly class="timePicker" :value="selectTime ? selectTime : ''" :placeholder="selectTime ? selectTime : $t('booking.time.timeInputPlaceholder')">
-          <div class="selectIcon"></div>
+      <div class="contentWrap">
+        <div class="content">
+          <div class="title">{{ $t('booking.time.timeInputTitle') }}</div>
+          <div class="selectWrap" @click="openPop">
+            <input type="text" readonly class="timePicker" :value="selectTime ? selectTime : ''" :placeholder="selectTime ? selectTime : $t('booking.time.timeInputPlaceholder')">
+            <div class="selectIcon"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -109,7 +111,6 @@ export default {
 
 <style lang="scss" scoped>
   .timeWrap{
-    padding: 22px 16px 120px 16px;
     .popup-zIndex{
       z-index: 3;
     }
@@ -136,43 +137,46 @@ export default {
         line-height: 22px;
       }
     }
-    .contentWrap{
-      margin-top: 50px;
-      .content{
-        margin-top: 30px;
-        .selectWrap{
-          position: relative;
-          margin-top: 10px;
-          .selectIcon{
-            position: absolute;
-            top: calc(50% - 20px);
-            right: 6px;
-            width: 40px;
-            height: 40px;
-            background-image: url(~assets/img/ic-more.svg);
-            background-size: 22px 22px;
-            background-repeat: no-repeat;
-            background-position: center;
+    .timeBodyWrap{
+      padding: 22px 16px 120px 16px;
+      .contentWrap{
+        margin-top: 50px;
+        .content{
+          margin-top: 30px;
+          .selectWrap{
+            position: relative;
+            margin-top: 10px;
+            .selectIcon{
+              position: absolute;
+              top: calc(50% - 20px);
+              right: 6px;
+              width: 40px;
+              height: 40px;
+              background-image: url(~assets/img/ic-more.svg);
+              background-size: 22px 22px;
+              background-repeat: no-repeat;
+              background-position: center;
+            }
           }
-        }
-        &:first-of-type{
-          margin-top: 0;
-        }
-        .title{
-          font-size: 15px;
-          color: #000;
-        }
-        input{
-          width:100%;
-          height: 64px;
-          border-radius: 4px;
-          border: solid 1px #ebecf1;
-          background-color: #f8f9fb;
-          font-size: 20px;
-          padding: 20px;
-          cursor: pointer;
-          &::placeholder{
-            color: #939499;
+          &:first-of-type{
+            margin-top: 0;
+          }
+          .title{
+            font-size: 15px;
+            color: #000;
+          }
+          input{
+            width:100%;
+            height: 64px;
+            border-radius: 4px;
+            border: solid 1px #ebecf1;
+            background-color: #f8f9fb;
+            font-size: 20px;
+            padding: 20px;
+            cursor: pointer;
+            &::placeholder{
+              color: #939499;
+            }
           }
         }
       }

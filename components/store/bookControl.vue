@@ -1,11 +1,9 @@
 <template>
-  <div class="bookWrapper scrollable navi">
-    <div v-if="!messagePopFlag">
-      <book
-        @changePage="changePage"
-        @success="openMessage"
-      ></book>
-    </div>
+  <div class="bookingControl">
+    <book
+      v-if="!messagePopFlag"
+      @success="openMessage"
+    ></book>
     <messagePop
       v-if="messagePopFlag"
       :bookData="bookData"
@@ -51,18 +49,15 @@
         this.bookData = bookData;
         this.messagePopFlag = true;
       },
-      changePage(page) {
-        this.$emit('changePage', page);
-      },
-    },
-    mounted() {
-      this.$bodyLock.lock();
     },
   };
 </script>
 
 <style lang="scss">
-  .bookWrapper{
+  .bookingControl{
+    .fixTop{
+      z-index: 2;
+    }
     .header{
       width: 100%;
       text-align: center;

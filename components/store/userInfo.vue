@@ -1,47 +1,51 @@
 <template>
   <div class="requestWrap">
     <div class="fixTop">
-      <div class="header">
-        <button @click="$emit('backStep')"></button>
-      </div>
-    </div>
-    <div class="serviceTitle">
-      <div class="intro">
-        {{ $t('booking.userInfo.title') }}
-      </div>
-      <div class="sub">
-        {{ $t('booking.userInfo.subTitle') }}
-      </div>
-    </div>
-    <div class="contentWrap scrollable">
-      <div class="content">
-        <div class="title">{{ $t('booking.userInfo.emailInputTitle') }}</div>
-        <input type="text" v-bind:value="email" v-on:input="email = $event.target.value" class="email" :placeholder="$t('booking.userInfo.emailInputPlaceholder')">
-        <transition name="fade">
-          <div v-if="email && isValidEmail" class="err">{{ $t('booking.userInfo.emailErr') }}</div>
-        </transition>
-      </div>
-      <div class="content">
-        <div class="title">{{ $t('booking.userInfo.nameInputTitle') }}</div>
-        <input type="text" v-bind:value="name" v-on:input="name = $event.target.value" class="name" :placeholder="$t('booking.userInfo.nameInputPlaceholder')">
-      </div>
-      <div class="content">
-        <div class="title">{{ $t('booking.userInfo.companionsInputTitle') }}</div>
-        <div class="selectWrap">
-          <select class="companions" v-model="headCount">
-            <option
-              v-for="x in 12"
-              :key="x"
-              :value="x"
-            >{{x}}</option>
-          </select>
-          <div class="selectIcon"></div>
+      <div class="topInfo">
+        <div class="header">
+          <button @click="$emit('backStep')"></button>
+        </div>
+        <div class="serviceTitle">
+          <div class="intro">
+            {{ $t('booking.userInfo.title') }}
+          </div>
+          <div class="sub">
+            {{ $t('booking.userInfo.subTitle') }}
+          </div>
         </div>
       </div>
-      <div class="content">
-        <div class="title">{{ $t('booking.userInfo.requestInputTitle') }}</div>
-        <textarea type="text" v-bind:value="request" v-on:input="request = $event.target.value" class="request" :placeholder="$t('booking.userInfo.requestInputPlaceholder')">
-        </textarea>
+    </div>
+    <div class="userInfoWrap scrollable">
+      <div class="contentWrap">
+        <div class="content">
+          <div class="title">{{ $t('booking.userInfo.emailInputTitle') }}</div>
+          <input type="text" v-bind:value="email" v-on:input="email = $event.target.value" class="email" :placeholder="$t('booking.userInfo.emailInputPlaceholder')">
+          <transition name="fade">
+            <div v-if="email && isValidEmail" class="err">{{ $t('booking.userInfo.emailErr') }}</div>
+          </transition>
+        </div>
+        <div class="content">
+          <div class="title">{{ $t('booking.userInfo.nameInputTitle') }}</div>
+          <input type="text" v-bind:value="name" v-on:input="name = $event.target.value" class="name" :placeholder="$t('booking.userInfo.nameInputPlaceholder')">
+        </div>
+        <div class="content">
+          <div class="title">{{ $t('booking.userInfo.companionsInputTitle') }}</div>
+          <div class="selectWrap">
+            <select class="companions" v-model="headCount">
+              <option
+                v-for="x in 12"
+                :key="x"
+                :value="x"
+              >{{x}}</option>
+            </select>
+            <div class="selectIcon"></div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="title">{{ $t('booking.userInfo.requestInputTitle') }}</div>
+          <textarea type="text" v-bind:value="request" v-on:input="request = $event.target.value" class="request" :placeholder="$t('booking.userInfo.requestInputPlaceholder')">
+          </textarea>
+        </div>
       </div>
     </div>
     <div class="fixBottom">
@@ -98,72 +102,77 @@ export default {
 
 <style lang="scss" scoped>
   .requestWrap{
-    padding: 22px 16px 129px 16px;
-    .serviceTitle{
-      .intro{
-        font-size: 30px;
-        font-weight: bold;
-        line-height: 39px;
-        color: #000;
-      }
-      .sub{
-        margin-top: 20px;
-        font-size: 15px;
-        color: #939499;
-        line-height: 22px;
+    .topInfo{
+      background-color: #fff;
+      .serviceTitle{
+        padding: 22px 16px 10px 16px;
+        .intro{
+          font-size: 30px;
+          font-weight: bold;
+          line-height: 39px;
+          color: #000;
+        }
+        .sub{
+          margin-top: 20px;
+          font-size: 15px;
+          color: #939499;
+          line-height: 22px;
+        }
       }
     }
-    .contentWrap{
-      margin-top: 22px;
-      .content{
-        margin-top: 30px;
-        &:first-of-type{
-          margin-top: 0;
-        }
-        .selectWrap{
-          position: relative;
-          margin-top: 10px;
-          .selectIcon{
-            position: absolute;
-            top: calc(50% - 20px);
-            right: 6px;
-            width: 40px;
-            height: 40px;
-            background-image: url(~assets/img/ic-more.svg);
-            background-size: 22px 22px;
-            background-repeat: no-repeat;
-            background-position: center;
+    .userInfoWrap{
+      padding: 133px 16px 200px 16px;
+      .contentWrap{
+        .content{
+          margin-top: 30px;
+          &:first-of-type{
+            margin-top: 0;
           }
-        }
-        select{
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-        }
-        input, textarea{
-          margin-top: 10px;
-        }
-        select, input, textarea{
-          width:100%;
-          height: 64px;
-          border-radius: 4px;
-          border: solid 1px #ebecf1;
-          background-color: #f8f9fb;
-          font-size: 20px;
-          padding: 20px;
-          cursor: pointer;
-          &::placeholder{
-            color: #939499;
+          .selectWrap{
+            position: relative;
+            margin-top: 10px;
+            .selectIcon{
+              position: absolute;
+              top: calc(50% - 20px);
+              right: 6px;
+              width: 40px;
+              height: 40px;
+              background-image: url(~assets/img/ic-more.svg);
+              background-size: 22px 22px;
+              background-repeat: no-repeat;
+              background-position: center;
+            }
           }
-        }
-        textarea{
-          height: 128px;
-        }
-        .err{
-          color: #d0021b;
-          font-size: 16px;
-          margin-top: 10px;
-          transition: .3s ease;
+          select{
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+          }
+          input, textarea{
+            margin-top: 10px;
+          }
+          select, input, textarea{
+            width:100%;
+            height: 64px;
+            border-radius: 4px;
+            border: solid 1px #ebecf1;
+            background-color: #f8f9fb;
+            font-size: 20px;
+            padding: 20px;
+            cursor: pointer;
+            &::placeholder{
+              color: #939499;
+            }
+          }
+          textarea{
+            height: 128px;
+          }
+          .err{
+            color: #d0021b;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: .3s ease;
+          }
         }
       }
     }
