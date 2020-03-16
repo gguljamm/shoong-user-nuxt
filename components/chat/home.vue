@@ -29,7 +29,11 @@
         </li>
         <li @click="submit('group')">
           <div class="img"></div>
-          <div>Shoong users</div>
+          <div class="firstLine">
+            <div>Shoong users <span>{{ groupLength }}</span></div>
+            <div></div>
+          </div>
+          <div class="secondLine"></div>
         </li>
       </ul>
     </div>
@@ -56,6 +60,7 @@ export default {
       noticeShow: true,
       chatSocket: null,
       questionLastMsg: {},
+      groupLength: '',
     };
   },
   methods: {
@@ -96,6 +101,13 @@ export default {
         }
       });
     }
+    Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/member`).once('value', (snap) => {
+      const val = snap.val();
+      console.log(val);
+      if (val) {
+        this.groupLength = Object.keys(val).length;
+      }
+    });
   },
   beforeDestroy() {
     if (this.chatSocket) {
@@ -145,6 +157,9 @@ export default {
             display: flex;
             > div:first-child{
               flex: auto;
+              > span{
+                color: rgb(147, 148, 153);
+              }
             }
             > div:nth-of-type(2){
               flex: 0 0 80px;

@@ -11,11 +11,11 @@
     } : {}">
       <ul>
         <div v-if="loading" class="loader">loading</div>
-        <li v-show="!loading" class="chatBox" v-for="(x, index) in chatList" :key="x.key" :class="x.user === 'helper' ? 'left' : 'right'">
+        <li v-show="!loading" class="chatBox" v-for="(x, index) in chatList" :key="x.key" :class="x.user === userKey ? 'right' : 'left'">
           <div v-show="index === 0 || printDate(x) !== printDate(chatList[index - 1])"><div>{{ printDate(x) }}</div></div>
           <div>
-            <div class="name" v-if="x.user === 'helper' && (index === 0 || chatList[index - 1].user !== x.user)">
-              {{ x.user === 'helper' ? 'Shoong Crew' : x.user }}
+            <div class="name" v-if="x.user !== userKey && (index === 0 || chatList[index - 1].user !== x.user)">
+              {{ memberList[x.user] ? memberList[x.user].name : 'no_named' }}
               <span v-if="x.isNotice">| {{ $t('chat.answer') }}</span>
             </div>
             <div class="chatBubble">
@@ -57,6 +57,7 @@ export default {
       timeout: null,
       loading: true,
       isInputFocus: false,
+      memberList: {},
     };
   },
   methods: {
@@ -84,7 +85,7 @@ export default {
       }
       const text = this.inputText;
       const time = new Date().getTime();
-      Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}`).push({
+      Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/chat`).push({
         text,
         user: this.userKey,
         time,
@@ -106,7 +107,7 @@ export default {
       if (this.chatSocket) {
         this.chatSocket.off();
       }
-      this.chatSocket = Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}`);
+      this.chatSocket = Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/chat`);
       const cbDisplayMessages = (data) => {
         this.loading = false;
         const v = data.val();
@@ -123,6 +124,20 @@ export default {
         }, 100);
       };
       this.chatSocket.limitToLast(50).on('child_added', cbDisplayMessages.bind(this));
+      if (this.memberSocket) {
+        this.memberSocket.off();
+      }
+      this.memberSocket = Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/member`);
+      this.memberSocket.on('value', (snap) => {
+        const member = snap.val();
+        if (!member || Object.keys(member).indexOf(this.userKey) === -1) {
+          Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/member/${this.userKey}`).set({
+            name: 'matthew',
+            pic: 'asd',
+          });
+        }
+        this.memberList = member;
+      });
     };
     if (!this.$store.state.user.uid) {
       const interval = setInterval(() => {
