@@ -1,11 +1,9 @@
 <template>
-  <div class="bookWrapper scrollable">
-    <div v-if="!messagePopFlag">
-      <book
-        @changePage="changePage"
-        @success="openMessage"
-      ></book>
-    </div>
+  <div class="bookingControl">
+    <book
+      v-if="!messagePopFlag"
+      @success="openMessage"
+    ></book>
     <messagePop
       v-if="messagePopFlag"
       :bookData="bookData"
@@ -51,26 +49,22 @@
         this.bookData = bookData;
         this.messagePopFlag = true;
       },
-      changePage(page) {
-        this.$emit('changePage', page);
-      },
     },
   };
 </script>
 
 <style lang="scss">
-  .bookWrapper{
-    .header{
+  .bookingControl{
+    .fixTop{
       z-index: 2;
-      background-color: #FFF;
-      position: fixed;
-      top: 0;
-      left: 0;
+    }
+    .header{
       width: 100%;
       text-align: center;
       display: flex;
       justify-content: flex-start;
       padding: 8px 0 0 4px;
+      background-color: #fff;
       > button{
         bottom: 0;
         width: 44px;
@@ -79,6 +73,24 @@
         background-position: center center;
         &:nth-of-type(1){
           background-image: url(~assets/img/chevron-left.svg);
+        }
+      }
+    }
+    .pageBottomBtnWrap{
+      width: 100%;
+      height: 95px;
+      padding: 22px 21px;
+      margin-bottom: 44px;
+      button{
+        transition: .3s ease;
+        width: 100%;
+        height: 55px;
+        border-radius: 6px;
+        font-weight: bold;
+        background-color: #e7b6a7;
+        color: #fff;
+        &.active{
+          background-color: #ff4208;
         }
       }
     }

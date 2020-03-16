@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="init"
-    class="bookingControlWrap storeWrapper"
-  >
+  <div class="bookingWrapper">
     <component
       :is="componentInstance"
       :bookData="bookData"
@@ -12,7 +9,7 @@
       @backStep="backStep"
       @booking="bookingSubmit"
       :key="steps"
-      class="bookComponent"
+      class="bookComponent scrollable"
     ></component>
   </div>
 </template>
@@ -39,7 +36,6 @@
         },
       };
       return {
-        init: false,
         moment,
         Api,
         isValidBtn: true,
@@ -66,12 +62,12 @@
         if (previous) {
           this.steps = previous;
         } else {
-          this.$emit('changePage', 'home');
+          history.back();
         }
       },
       receiveData(data) {
         this.bookData[this.steps] = data;
-        console.log(this.bookData);
+        // console.log(this.bookData);
         const next = this.stepsList && this.stepsList[this.stepsList.indexOf(this.steps) + 1];
         if (next) {
           this.steps = next;
@@ -127,7 +123,6 @@
         this.windowWidth = window.innerWidth;
         window.addEventListener('resize', this.keyboardUp);
         this.keyboardUp();
-        this.init = true;
       });
     },
     beforeDestroy() {
@@ -140,8 +135,8 @@
 <style lang="scss" scoped>
   .bookComponent{
     user-select: none;
+    height: 100vh;
   }
-  .bookingControlWrap{
-    padding-top: 50px;
+  .bookingWrapper{
   }
 </style>
