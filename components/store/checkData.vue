@@ -1,52 +1,57 @@
 <template>
   <div class="checkDataWrap">
-    <div class="header">
-      <button @click="$emit('backStep')"></button>
+    <div class="fixTop">
+      <div class="header">
+        <button @click="$emit('backStep')"></button>
+      </div>
     </div>
-    <div class="serviceTitle">
-      <div class="intro" v-html="$t('booking.checkData.title')"></div>
-    </div>
-    <div class="contentWrap">
-      <div
-        v-for="(keyName, index) in Object.keys(checkData)"
-        :key="index"
-        class="info"
-        :class="keyName"
-      >
+    <div class="checkDataBodyWrap">
+      <div class="serviceTitle">
+        <div class="intro" v-html="$t('booking.checkData.title')"></div>
+      </div>
+      <div class="contentWrap">
         <div
-          v-if="checkData[keyName]"
-          class="infoWrap"
+          v-for="(keyName, index) in Object.keys(checkData)"
+          :key="index"
+          class="info"
+          :class="keyName"
         >
-          <div class="name">{{ $t(`booking.checkData.info.${keyName}`) }}</div>
-          <div class="val">{{ checkData[keyName] }}</div>
+          <div
+            v-if="checkData[keyName]"
+            class="infoWrap"
+          >
+            <div class="name">{{ $t(`booking.checkData.info.${keyName}`) }}</div>
+            <div class="val">{{ checkData[keyName] }}</div>
+          </div>
         </div>
       </div>
     </div>
     <div v-if="dataConfirm" class="mask" @click="closePop"></div>
     <transition name="slide-bottom-fade" mode="out-in">
-      <div
-        v-if="dataConfirm"
-        class="dataConfirm"
-      >
-        <div class="topInfo"><button @click="closePop"></button></div>
-        <div class="info">
-          <div class="title">{{ $t('booking.checkData.checkDataPop.title') }}</div>
-          <div class="sub">{{ $t('booking.checkData.checkDataPop.subTitle') }}</div>
-        </div>
-        <div class="contentWrap">
-          <div class="email">{{ bookData.userInfo.email }}</div>
-          <div class="selectBtn">
-            <button @click="emailConfirm = 'yes'" :class="emailConfirm === 'yes' ? 'active' : ''" class="yes">{{ $t('booking.checkData.checkDataPop.yes') }}</button>
-            <button @click="emailConfirm = 'no'" :class="emailConfirm === 'no' ? 'active' : '' " class="no">{{ $t('booking.checkData.checkDataPop.no') }}</button>
+      <div v-if="dataConfirm" class="fixBottom popup-zIndex">
+        <div class="dataConfirm">
+          <div class="topInfo"><button @click="closePop"></button></div>
+          <div class="info">
+            <div class="title">{{ $t('booking.checkData.checkDataPop.title') }}</div>
+            <div class="sub">{{ $t('booking.checkData.checkDataPop.subTitle') }}</div>
           </div>
-        </div>
-        <div class="btnBottomPop">
-          <button @click="emailConfirm ? checkEmail() : ''" :class="emailConfirm ? 'active' : ''">OK</button>
+          <div class="contentWrap">
+            <div class="email">{{ bookData.userInfo.email }}</div>
+            <div class="selectBtn">
+              <button @click="emailConfirm = 'yes'" :class="emailConfirm === 'yes' ? 'active' : ''" class="yes">{{ $t('booking.checkData.checkDataPop.yes') }}</button>
+              <button @click="emailConfirm = 'no'" :class="emailConfirm === 'no' ? 'active' : '' " class="no">{{ $t('booking.checkData.checkDataPop.no') }}</button>
+            </div>
+          </div>
+          <div class="btnBottomPop">
+            <button @click="emailConfirm ? checkEmail() : ''" :class="emailConfirm ? 'active' : ''">OK</button>
+          </div>
         </div>
       </div>
     </transition>
-    <div class="btnBottom">
-      <button @click="openPop">OK</button>
+    <div class="fixBottom">
+      <div class="pageBottomBtnWrap">
+        <button @click="openPop" class="active">OK</button>
+      </div>
     </div>
   </div>
 </template>
@@ -103,41 +108,47 @@ export default {
 
 <style lang="scss" scoped>
   .checkDataWrap{
-    padding: 22px 16px 120px 16px;
-    .serviceTitle{
-      .intro{
-        font-size: 30px;
-        font-weight: bold;
-        line-height: 39px;
-        color: #000;
-      }
+    .popup-zIndex{
+      z-index: 3;
     }
-    .contentWrap {
-      margin-top: 30px;
-      .info{
-        margin-top: 30px;
-        font-size: 16px;
-        &:first-of-type{
-          margin-top: 0;
+    .checkDataBodyWrap{
+      padding: 22px 16px 120px 16px;
+      margin-top: 50px;
+      .serviceTitle{
+        .intro{
+          font-size: 30px;
+          font-weight: bold;
+          line-height: 39px;
+          color: #000;
         }
-        .infoWrap{
-          display: flex;
-          .name{
-            width: 50%;
-            color: #939499;
+      }
+      .contentWrap {
+        margin-top: 30px;
+        .info{
+          margin-top: 30px;
+          font-size: 16px;
+          &:first-of-type{
+            margin-top: 0;
           }
-          .val{
-            width: 50%;
-            color: #000;
-            font-weight: bold;
-          }
-          &.request{
-            display: block;
-            .name, .val{
-              width: 100%;
+          .infoWrap{
+            display: flex;
+            .name{
+              width: 50%;
+              color: #939499;
             }
             .val{
-              margin-top: 10px;
+              width: 50%;
+              color: #000;
+              font-weight: bold;
+            }
+            &.request{
+              display: block;
+              .name, .val{
+                width: 100%;
+              }
+              .val{
+                margin-top: 10px;
+              }
             }
           }
         }
@@ -145,7 +156,7 @@ export default {
     }
     .mask{
       z-index: 3;
-      position: fixed;
+      position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
@@ -153,13 +164,11 @@ export default {
       background-color: rgba(0, 0, 0, 0.39);
     }
     .dataConfirm {
+      width: 100%;
       z-index: 3;
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 44px;
       background-color: #fff;
       padding-bottom: 22px;
+      margin-bottom: 44px;
 
       .topInfo {
         line-height: 44px;
@@ -241,7 +250,7 @@ export default {
         }
       }
       .btnBottomPop{
-        margin: 22px 21px 0 21px;
+        padding: 22px 21px 0 21px;
         button{
           width: 100%;
           height: 55px;
@@ -254,25 +263,6 @@ export default {
             background-color: #ff4208;
           }
         }
-      }
-    }
-    .btnBottom{
-      position: fixed;
-      width: 100%;
-      height: 95px;
-      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff 50%);
-      padding: 22px 21px;
-      left: 0;
-      right: 0;
-      bottom: 44px;
-      button{
-        transition: .3s ease;
-        width: 100%;
-        height: 55px;
-        border-radius: 6px;
-        font-weight: bold;
-        color: #fff;
-        background-color: #ff4208;
       }
     }
   }

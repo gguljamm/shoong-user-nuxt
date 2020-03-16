@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="init"
-    class="nuxtWrapper scrollable navi"
-  >
+  <div class="nuxtWrapper scrollable navi">
     <div class="container">
       <div class="mask containerMask">
         <a href="/" class="logo"></a>
@@ -26,13 +23,8 @@
     },
     methods: {
       moveBooking() {
-        this.$emit('changePage', 'booking');
+        this.$router.push('/store/bookControl');
       },
-    },
-    mounted() {
-      this.$nextTick(() => {
-        this.init = true;
-      });
     },
   };
 </script>
