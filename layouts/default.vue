@@ -101,5 +101,12 @@ export default {
     transform: translateX(50px);
     opacity: 0;
   }
+  .fade-enter-active,
+  .fade-leave-active{
+    transition: all .3s ease;
+  }
+  .fade-enter, .fade-leave-to{
+    opacity: 0;
+  }
   /* VUE transitions */
 </style>

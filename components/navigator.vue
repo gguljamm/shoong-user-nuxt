@@ -25,11 +25,10 @@ export default {};
 
 <style lang="scss" scoped>
   .footer{
-    z-index: 10;
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
+    width: 100%;
     height: 44px;
     height: calc(constant(safe-area-inset-bottom) + 44px);
     height: calc(env(safe-area-inset-bottom) + 44px);

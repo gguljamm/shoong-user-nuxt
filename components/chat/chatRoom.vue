@@ -6,27 +6,33 @@
         {{ $t('chat.title') }}
       </div>
     </div>
-    <ul ref="chatWrapper" class="scrollable">
-      <div v-if="loading" class="loader">loading</div>
-      <li v-show="!loading" class="chatBox" v-for="(x, index) in chatList" :key="x.key" :class="x.user === 'helper' ? 'left' : 'right'">
-        <div v-show="index === 0 || printDate(x) !== printDate(chatList[index - 1])"><div>{{ printDate(x) }}</div></div>
-        <div>
-          <div class="name" v-if="x.user === 'helper' && (index === 0 || chatList[index - 1].user !== x.user)">
-            {{ x.user === 'helper' ? 'Shoong Crew' : x.user }}
-            <span v-if="x.isNotice">| {{ $t('chat.answer') }}</span>
+    <div class="scrollable" ref="chatWrapper" :style="isInputFocus ? {
+      'padding-bottom': 0,
+    } : {}">
+      <ul>
+        <div v-if="loading" class="loader">loading</div>
+        <li v-show="!loading" class="chatBox" v-for="(x, index) in chatList" :key="x.key" :class="x.user === 'helper' ? 'left' : 'right'">
+          <div v-show="index === 0 || printDate(x) !== printDate(chatList[index - 1])"><div>{{ printDate(x) }}</div></div>
+          <div>
+            <div class="name" v-if="x.user === 'helper' && (index === 0 || chatList[index - 1].user !== x.user)">
+              {{ x.user === 'helper' ? 'Shoong Crew' : x.user }}
+              <span v-if="x.isNotice">| {{ $t('chat.answer') }}</span>
+            </div>
+            <div class="chatBubble">
+              <div v-for="(line, key) in x.text.split('\n')" :key="`${index}_${key}`">{{ line }}</div>
+              <div class="time"
+                   v-if="x.time && ((index === chatList.length - 1 || chatList[index + 1].user !== x.user) || (index !== 0 && chatList[index + 1].user === x.user && chatList[index + 1].time - x.time > 180000) || !chatList[index - 1].time)"
+              >{{ format.formatTime(x.time) }}</div>
+            </div>
           </div>
-          <div class="chatBubble">
-            <div v-for="(line, key) in x.text.split('\n')" :key="`${index}_${key}`">{{ line }}</div>
-            <div class="time"
-                 v-if="x.time && ((index === chatList.length - 1 || chatList[index + 1].user !== x.user) || (index !== 0 && chatList[index + 1].user === x.user && chatList[index + 1].time - x.time > 180000) || !chatList[index - 1].time)"
-            >{{ format.formatTime(x.time) }}</div>
-          </div>
-        </div>
-      </li>
-    </ul>
-    <div class="fixBottom">
+        </li>
+      </ul>
+    </div>
+    <div class="fixBottom" :style="isInputFocus ? {
+      'padding-bottom': 0,
+    } : {}">
       <div class="inputBox">
-        <textarea v-model="inputText" placeholder="Message"></textarea>
+        <textarea v-model="inputText" placeholder="Message" @focusin="isInputFocus = true" @focusout="isInputFocus = false"></textarea>
         <button @click="chatSubmit()" :style="{ opacity: inputText.length > 0 ? 1 : 0 }"></button>
       </div>
     </div>
@@ -62,6 +68,7 @@ export default {
       num: 0,
       timeout: null,
       loading: true,
+      isInputFocus: false,
     };
   },
   methods: {
@@ -104,7 +111,7 @@ export default {
       }
       const text = this.inputText;
       const time = new Date().getTime();
-      Firebase.database().ref(`/chatList/${this.userKey}`).push({
+      Firebase.database().ref(`/question/${this.userKey}`).push({
         text,
         user: this.userKey,
         time,
@@ -119,7 +126,7 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener('resize', this.scrollBottom);
+    this.$bodyLock.lock();
     this.$nextTick(() => {
       this.init = true;
     });
@@ -127,7 +134,7 @@ export default {
       if (this.chatSocket) {
         this.chatSocket.off();
       }
-      this.chatSocket = Firebase.database().ref(`/chatList/${this.userKey}`);
+      this.chatSocket = Firebase.database().ref(`/question/${this.userKey}`);
       const cbDisplayMessages = (data) => {
         this.loading = false;
         const v = data.val();
@@ -170,7 +177,6 @@ export default {
     }
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.scrollBottom);
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
@@ -189,6 +195,7 @@ export default {
     z-index: 20;
     width: 100%;
     height: 100%;
+    background-color: #FFF;
     .fixTop{
       z-index: 10;
       background-color: #000;
@@ -217,86 +224,87 @@ export default {
         }
       }
     }
-    > ul{
-      padding: 56px 12px 63px;
-      min-height: 100vh;
+    .scrollable{
       background-color: #ebecf1;
-      li.chatBox{
-        margin-bottom: 10px;
-        > div:first-child{
-          padding: 8px 0;
-          font-size: 12px;
-          text-align: center;
-          position: relative;
-          &:after{
-            display: block;
-            content: "";
-            width: 100vw;
-            left: 0;
-            position: absolute;
-            transform: translateY(-12px);
-            z-index: 0;
-            border-bottom: 1px solid #cccdd1;
-          }
-          > div{
-            display: inline-block;
-            z-index: 1;
+      > ul{
+        padding: 44px 12px 63px;
+        li.chatBox{
+          margin-bottom: 10px;
+          > div:first-child{
+            padding: 8px 0;
+            font-size: 12px;
+            text-align: center;
             position: relative;
-            line-height: 16px;
-            padding: 4px 12px;
-            background-color: #ebecf1;
-          }
-        }
-        > div:nth-of-type(2){
-          overflow: auto;
-          .name{
-            font-size: 14px;
-            padding-top: 4px;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: black;
-            > span{
-              font-size: 12px;
-              color: #939499;
-              font-weight: normal;
-            }
-          }
-          .chatBubble{
-            word-break: break-all;
-            font-size: 14px;
-            line-height: 20px;
-            background-color: #f8f9fb;
-            border-radius: 20px;
-            display: inline-block;
-            padding: 10px 20px;
-            max-width: 80%;
-            position: relative;
-            > div:not(.time){
-              min-height: 20px;
-            }
-            .time{
+            &:after{
+              display: block;
+              content: "";
+              width: 100vw;
+              left: 0;
               position: absolute;
-              bottom: 0;
-              right: -68px;
-              width: 60px;
-              font-size: 11px;
-              color: #939499;
-              overflow: visible;
-              white-space: nowrap;
+              transform: translateY(-12px);
+              z-index: 0;
+              border-bottom: 1px solid #cccdd1;
+            }
+            > div{
+              display: inline-block;
+              z-index: 1;
+              position: relative;
+              line-height: 16px;
+              padding: 4px 12px;
+              background-color: #ebecf1;
             }
           }
-        }
-        &.left .chatBubble{
-          border-top-left-radius: 0 !important;
-        }
-        &.right .chatBubble{
-          float: right;
-          border-top-right-radius: 0 !important;
-          background-color: #ff4208 !important;
-          color: #FFF !important;
-          .time{
-            text-align: right;
-            left: -68px;
+          > div:nth-of-type(2){
+            overflow: auto;
+            .name{
+              font-size: 14px;
+              padding-top: 4px;
+              font-weight: bold;
+              margin-bottom: 6px;
+              color: black;
+              > span{
+                font-size: 12px;
+                color: #939499;
+                font-weight: normal;
+              }
+            }
+            .chatBubble{
+              word-break: break-all;
+              font-size: 14px;
+              line-height: 20px;
+              background-color: #f8f9fb;
+              border-radius: 20px;
+              display: inline-block;
+              padding: 10px 20px;
+              max-width: 80%;
+              position: relative;
+              > div:not(.time){
+                min-height: 20px;
+              }
+              .time{
+                position: absolute;
+                bottom: 0;
+                right: -68px;
+                width: 60px;
+                font-size: 11px;
+                color: #939499;
+                overflow: visible;
+                white-space: nowrap;
+              }
+            }
+          }
+          &.left .chatBubble{
+            border-top-left-radius: 0 !important;
+          }
+          &.right .chatBubble{
+            float: right;
+            border-top-right-radius: 0 !important;
+            background-color: #ff4208 !important;
+            color: #FFF !important;
+            .time{
+              text-align: right;
+              left: -68px;
+            }
           }
         }
       }

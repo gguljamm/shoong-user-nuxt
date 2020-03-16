@@ -24,7 +24,7 @@ export default {
     },
     logout() {
       this.$store.commit('setUserId', {});
-      this.$cookies.set('user', undefined);
+      this.$cookies.remove('user');
       if (this.$route.path !== '/') {
         this.$router.replace('/');
       }
