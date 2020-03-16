@@ -114,10 +114,6 @@ export default {
     .popup-zIndex{
       z-index: 3;
     }
-    .fixed{
-      position: fixed;
-      overflow: hidden;
-    }
     a{
       display: block;
       text-decoration: none;
@@ -139,6 +135,7 @@ export default {
     }
     .timeBodyWrap{
       padding: 22px 16px 120px 16px;
+      margin-top: 50px;
       .contentWrap{
         margin-top: 50px;
         .content{
@@ -183,7 +180,7 @@ export default {
     }
     .mask{
       z-index: 3;
-      position: fixed;
+      position: absolute;
       top: 0;
       right: 0;
       bottom: 0;

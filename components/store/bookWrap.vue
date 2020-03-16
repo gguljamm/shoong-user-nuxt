@@ -136,7 +136,6 @@
   .bookComponent{
     user-select: none;
     height: 100vh;
-    margin-top: 50px;
   }
   .bookingWrapper{
   }

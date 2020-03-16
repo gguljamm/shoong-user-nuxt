@@ -66,7 +66,6 @@ export default {
 
 <style lang="scss" scoped>
   .routeWrap {
-
     a {
       display: block;
       text-decoration: none;
@@ -74,6 +73,7 @@ export default {
     }
     .routeBodyWrap{
       padding: 22px 16px 120px 16px;
+      margin-top: 50px;
       .serviceTitle {
         display: flex;
 
