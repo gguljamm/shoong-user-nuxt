@@ -94,6 +94,7 @@ export default {
         text,
         user: this.userKey,
         time,
+        members: Object.keys(this.memberList).length,
       });
       this.inputText = '';
     },
@@ -220,7 +221,7 @@ export default {
               display: block;
               content: "";
               width: 100vw;
-              left: 0;
+              left: -12px;
               position: absolute;
               transform: translateY(-12px);
               z-index: 0;

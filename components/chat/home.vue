@@ -65,6 +65,7 @@ export default {
       groupLength: '',
       groupLastChat: '',
       groupLastTime: '',
+      groupSocket: null,
     };
   },
   methods: {
@@ -105,21 +106,23 @@ export default {
         }
       });
     }
-    Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/member`).once('value', (snap) => {
-      const val = snap.val();
-      if (val) {
-        this.groupLength = Object.keys(val).length;
-      }
-    });
-    Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/lastmsg`).on('value', (snap) => {
+    if (this.groupSocket) {
+      this.groupSocket.off();
+    }
+    this.groupSocket = Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/lastmsg`);
+    this.groupSocket.on('value', (snap) => {
       const val = snap.val();
       this.groupLastChat = val.text;
       this.groupLastTime = val.time;
+      this.groupLength = val.members;
     });
   },
   beforeDestroy() {
     if (this.chatSocket) {
       this.chatSocket.off();
+    }
+    if (this.groupSocket) {
+      this.groupSocket.off();
     }
   },
 };
