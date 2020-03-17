@@ -1,22 +1,24 @@
 <template>
   <transition name="fade" mode="out-in">
     <div id="messageWrap" class="message">
-      <div class="top">
-        <div class="checkIcon">
-          <div class="check"></div>
-        </div>
-        <div class="title">{{ $t('bookingSuccess.success') }}</div>
-        <div class="info">
-          <div class="email">{{bookData.email}}</div>
-          <div class="comment" v-html="$t('bookingSuccess.comment')">
+      <div class="scrollable">
+        <div class="top">
+          <div class="checkIcon">
+            <div class="check"></div>
+          </div>
+          <div class="title">{{ $t('bookingSuccess.success') }}</div>
+          <div class="info">
+            <div class="email">{{bookData.email}}</div>
+            <div class="comment" v-html="$t('bookingSuccess.comment')">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="bookData">
-        <div class="name">{{bookData.customerName}}</div>
-        <div class="date">{{ moment(bookData.date).format('ll ddd') }}</div>
-        <div class="route"><span>{{ bookData.departure }}</span><span class="arrow"></span><span>{{ bookData.arrival }}</span></div>
-        <div v-if="bookData.remark" class="remark">{{ bookData.remark }}</div>
+        <div class="bookData">
+          <div class="name">{{bookData.customerName}}</div>
+          <div class="date">{{ moment(bookData.date).format('ll ddd') }}</div>
+          <div class="route"><span>{{ bookData.departure }}</span><span class="arrow"></span><span>{{ bookData.arrival }}</span></div>
+          <div v-if="bookData.remark" class="remark">{{ bookData.remark }}</div>
+        </div>
       </div>
       <div class="gra"></div>
       <div class="btnBottom">
@@ -38,6 +40,7 @@ export default {
     };
   },
   mounted() {
+    this.$bodyLock.lock();
     setTimeout(() => {
       this.iconScale = 1.2;
     }, 250);
@@ -47,7 +50,10 @@ export default {
 
 <style lang="scss" scoped>
   .message {
-    padding: 0 20px;
+    height: 100vh;
+    .scrollable{
+      padding: 0 24px;
+    }
     .gra{
       left: 0;
       right: 0;
@@ -103,6 +109,7 @@ export default {
       margin-top: 102px;
       font-size: 16px;
       color: #000;
+      padding-bottom: 140px;
       .name{
         font-weight: bold;
       }

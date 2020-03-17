@@ -105,7 +105,7 @@ export default {
     .topInfo{
       background-color: #fff;
       .serviceTitle{
-        padding: 22px 16px 10px 16px;
+        padding: 22px 24px 10px 24px;
         .intro{
           font-size: 30px;
           font-weight: bold;
@@ -121,7 +121,7 @@ export default {
       }
     }
     .userInfoWrap{
-      padding: 133px 16px 200px 16px;
+      padding: 133px 24px 200px 24px;
       .contentWrap{
         .content{
           margin-top: 30px;

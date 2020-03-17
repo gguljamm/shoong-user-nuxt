@@ -63,7 +63,7 @@
       text-align: center;
       display: flex;
       justify-content: flex-start;
-      padding: 8px 0 0 4px;
+      padding: 16px 0 0 16px;
       background-color: #fff;
       > button{
         bottom: 0;

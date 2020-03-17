@@ -60,7 +60,7 @@ export default {
       }
     }
     .locationBodyWrap{
-      padding: 22px 16px 120px 16px;
+      padding: 22px 24px 120px 24px;
       margin-top: 50px;
       .contentWrap{
         margin-top: 22px;

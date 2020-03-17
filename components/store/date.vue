@@ -138,10 +138,11 @@ export default {
       color: inherit;
     }
     .topInfo{
-      padding: 0 16px;
+      padding: 15px 20px 0 20px;
       background-color: #fff;
       .title{
         display: flex;
+        padding-left: 7px;
         .intro{
           flex: auto;
           font-size: 30px;
@@ -168,16 +169,16 @@ export default {
       }
     }
     .calendarBody{
-      padding: 169px 16px 200px 16px;
+      padding: 169px 20px 200px 20px;
       .calendar {
         .calBody{
-          padding: 0 9px;
           .calWrap{
             margin-top: 30px;
             .calTitle{
               font-size: 20px;
               font-weight: bold;
               color: #000;
+              padding-left: 10px;
             }
             .calContent{
               margin-top: 25px;

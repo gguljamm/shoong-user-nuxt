@@ -112,7 +112,7 @@ export default {
       z-index: 3;
     }
     .checkDataBodyWrap{
-      padding: 22px 16px 120px 16px;
+      padding: 22px 24px 120px 24px;
       margin-top: 50px;
       .serviceTitle{
         .intro{
