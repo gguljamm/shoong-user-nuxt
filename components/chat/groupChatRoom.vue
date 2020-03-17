@@ -90,6 +90,11 @@ export default {
         user: this.userKey,
         time,
       });
+      Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/lastmsg`).set({
+        text,
+        user: this.userKey,
+        time,
+      });
       this.inputText = '';
     },
     scrollBottom() {

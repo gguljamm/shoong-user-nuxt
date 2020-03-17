@@ -31,9 +31,11 @@
           <div class="img"></div>
           <div class="firstLine">
             <div>Shoong users <span>{{ groupLength }}</span></div>
-            <div></div>
+            <div>{{ groupLastTime ? stampToString(groupLastTime) : '' }}</div>
           </div>
-          <div class="secondLine"></div>
+          <div class="secondLine">
+            {{ groupLastChat }}
+          </div>
         </li>
       </ul>
     </div>
@@ -61,6 +63,8 @@ export default {
       chatSocket: null,
       questionLastMsg: {},
       groupLength: '',
+      groupLastChat: '',
+      groupLastTime: '',
     };
   },
   methods: {
@@ -103,10 +107,14 @@ export default {
     }
     Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/member`).once('value', (snap) => {
       const val = snap.val();
-      console.log(val);
       if (val) {
         this.groupLength = Object.keys(val).length;
       }
+    });
+    Firebase.database().ref(`/groupChat/${this.$store.state.locale || 'en'}/lastmsg`).on('value', (snap) => {
+      const val = snap.val();
+      this.groupLastChat = val.text;
+      this.groupLastTime = val.time;
     });
   },
   beforeDestroy() {
