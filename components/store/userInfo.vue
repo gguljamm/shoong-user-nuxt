@@ -41,6 +41,7 @@
             <div class="selectIcon"></div>
           </div>
         </div>
+        {{isValidBtn}}
         <div class="content">
           <div class="title">{{ $t('booking.userInfo.requestInputTitle') }}</div>
           <textarea type="text" v-bind:value="request" v-on:input="request = $event.target.value" class="request" :placeholder="$t('booking.userInfo.requestInputPlaceholder')">
@@ -121,7 +122,7 @@ export default {
       }
     }
     .userInfoWrap{
-      padding: 133px 24px 200px 24px;
+      padding: 133px 24px 220px 24px;
       .contentWrap{
         .content{
           margin-top: 30px;
