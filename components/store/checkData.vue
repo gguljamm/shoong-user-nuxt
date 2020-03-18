@@ -168,7 +168,6 @@ export default {
       z-index: 3;
       background-color: #fff;
       padding-bottom: 22px;
-      margin-bottom: 44px;
 
       .topInfo {
         line-height: 44px;
@@ -195,6 +194,7 @@ export default {
       .info {
         margin-top: 10px;
         padding: 0 24px;
+        line-height: 19px;
 
         .title {
           font-size: 20px;

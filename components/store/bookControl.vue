@@ -55,6 +55,12 @@
 
 <style lang="scss">
   .bookingControl{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1;
     .fixTop{
       z-index: 2;
     }
@@ -80,7 +86,6 @@
       width: 100%;
       height: 95px;
       padding: 22px 21px;
-      margin-bottom: 44px;
       button{
         transition: .3s ease;
         width: 100%;

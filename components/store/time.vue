@@ -191,7 +191,6 @@ export default {
       width: 100%;
       z-index: 3;
       background-color: #fff;
-      margin-bottom: 44px;
       padding-bottom: 22px;
 
       .topInfo {

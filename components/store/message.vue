@@ -144,7 +144,7 @@ export default {
       padding: 22px 21px;
       left: 0;
       right: 0;
-      bottom: 44px;
+      bottom: 0;
       button{
         transition: .3s ease;
         width: 100%;

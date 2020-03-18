@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="userInfoWrap scrollable">
+    <div class="userInfoWrap scrollable" :class="requestInputFocus ? 'focus' : ''">
       <div class="contentWrap">
         <div class="content">
           <div class="title">{{ $t('booking.userInfo.emailInputTitle') }}</div>
@@ -41,10 +41,9 @@
             <div class="selectIcon"></div>
           </div>
         </div>
-        {{isValidBtn}}
         <div class="content">
           <div class="title">{{ $t('booking.userInfo.requestInputTitle') }}</div>
-          <textarea type="text" v-bind:value="request" v-on:input="request = $event.target.value" class="request" :placeholder="$t('booking.userInfo.requestInputPlaceholder')">
+          <textarea @focus="requestInputFocus = true" @blur="requestInputFocus = false" type="text" v-bind:value="request" v-on:input="request = $event.target.value" class="request" :placeholder="$t('booking.userInfo.requestInputPlaceholder')">
           </textarea>
         </div>
       </div>
@@ -70,6 +69,7 @@ export default {
       name,
       headCount,
       request,
+      requestInputFocus: false,
     };
   },
   computed: {
@@ -122,7 +122,10 @@ export default {
       }
     }
     .userInfoWrap{
-      padding: 133px 24px 220px 24px;
+      padding: 173px 24px 140px 24px;
+      &.focus{
+        padding: 173px 24px 420px 24px;
+      }
       .contentWrap{
         .content{
           margin-top: 30px;
