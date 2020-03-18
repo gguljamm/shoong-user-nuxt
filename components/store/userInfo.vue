@@ -1,21 +1,19 @@
 <template>
   <div class="requestWrap">
     <div class="fixTop">
-      <div class="topInfo">
-        <div class="header">
-          <button @click="$emit('backStep')"></button>
-        </div>
-        <div class="serviceTitle">
-          <div class="intro">
-            {{ $t('booking.userInfo.title') }}
-          </div>
-          <div class="sub">
-            {{ $t('booking.userInfo.subTitle') }}
-          </div>
-        </div>
+      <div class="header">
+        <button @click="$emit('backStep')"></button>
       </div>
     </div>
     <div class="userInfoWrap scrollable" :class="requestInputFocus ? 'focus' : ''">
+      <div class="serviceTitle">
+        <div class="intro">
+          {{ $t('booking.userInfo.title') }}
+        </div>
+        <div class="sub">
+          {{ $t('booking.userInfo.subTitle') }}
+        </div>
+      </div>
       <div class="contentWrap">
         <div class="content">
           <div class="title">{{ $t('booking.userInfo.emailInputTitle') }}</div>
@@ -103,10 +101,9 @@ export default {
 
 <style lang="scss" scoped>
   .requestWrap{
-    .topInfo{
-      background-color: #fff;
+    .userInfoWrap{
+      padding: 72px 24px 140px 24px;
       .serviceTitle{
-        padding: 22px 24px 10px 24px;
         .intro{
           font-size: 30px;
           font-weight: bold;
@@ -120,13 +117,11 @@ export default {
           line-height: 22px;
         }
       }
-    }
-    .userInfoWrap{
-      padding: 173px 24px 140px 24px;
       &.focus{
         padding: 173px 24px 420px 24px;
       }
       .contentWrap{
+        margin-top: 30px;
         .content{
           margin-top: 30px;
           &:first-of-type{

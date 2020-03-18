@@ -5,7 +5,7 @@
         <button @click="$emit('backStep')"></button>
       </div>
     </div>
-    <div class="checkDataBodyWrap">
+    <div class="checkDataBodyWrap scrollable">
       <div class="serviceTitle">
         <div class="intro" v-html="$t('booking.checkData.title')"></div>
       </div>
@@ -82,9 +82,6 @@ export default {
       this.dataConfirm = false;
     },
     openPop() {
-      // const html = document.querySelector('html');
-      // html.style.position = 'fixed';
-      // html.style.overflow = 'hidden';
       this.dataConfirm = true;
     },
     checkEmail() {
@@ -98,10 +95,8 @@ export default {
       this.$emit('booking');
     },
   },
-  beforeDestroy() {
-    // const html = document.querySelector('html');
-    // html.style.position = '';
-    // html.style.overflow = '';
+  mounted() {
+    this.$bodyLock.lock();
   },
 };
 </script>
@@ -112,8 +107,7 @@ export default {
       z-index: 3;
     }
     .checkDataBodyWrap{
-      padding: 22px 24px 120px 24px;
-      margin-top: 50px;
+      padding: 82px 24px 170px 24px;
       .serviceTitle{
         .intro{
           font-size: 30px;
@@ -139,6 +133,7 @@ export default {
             .val{
               width: 50%;
               color: #000;
+              word-break: break-word;
               font-weight: bold;
             }
             &.request{

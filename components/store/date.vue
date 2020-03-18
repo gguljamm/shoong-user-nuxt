@@ -169,7 +169,7 @@ export default {
       }
     }
     .calendarBody{
-      padding: 169px 20px 200px 20px;
+      padding: 248px 20px 200px 20px;
       .calendar {
         .calBody{
           .calWrap{
