@@ -81,9 +81,6 @@ export default {
       this.pickerOn = false;
     },
     openPop() {
-      const html = document.querySelector('html');
-      html.style.position = 'fixed';
-      html.style.overflow = 'hidden';
       this.pickerOn = true;
     },
     saveTime(time) {
@@ -92,11 +89,6 @@ export default {
     submit() {
       this.$emit('setData', this.selectTime);
     },
-  },
-  beforeDestroy() {
-    const html = document.querySelector('html');
-    html.style.position = '';
-    html.style.overflow = '';
   },
 };
 </script>
