@@ -41,6 +41,7 @@
     animation-name: car-ani;
     animation-fill-mode: forwards;
     position: relative;
+    user-select: none;
     .mask{
       top: 0;
       right: 0;
@@ -52,7 +53,7 @@
     .containerMask{
       padding: 32px 24px;
       a.logo{
-        background-image: url(https://cdn.bringprice.com/image/shoong/logo.svg);
+        background-image: url(~assets/img/logo-white.png);
         background-repeat: no-repeat;
         background-size: contain;
         width: 100px;
