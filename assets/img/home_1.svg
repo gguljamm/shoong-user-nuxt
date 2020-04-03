@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24pt" height="24pt" viewBox="0 0 24 24" version="1.1">
+<defs>
+<clipPath id="clip1">
+  <path d="M 2 1 L 22 1 L 22 23 L 2 23 Z M 2 1 "/>
+</clipPath>
+<clipPath id="clip2">
+  <path d="M 5 23 C 3.34375 23 2 21.65625 2 20 L 2 9 C 2 8.691406 2.140625 8.398438 2.386719 8.210938 L 11.386719 1.210938 C 11.746094 0.929688 12.253906 0.929688 12.613281 1.210938 L 21.613281 8.210938 C 21.859375 8.398438 22 8.691406 22 9 L 22 20 C 22 21.65625 20.65625 23 19 23 Z M 12 3.265625 L 4 9.488281 L 4 20 C 4 20.550781 4.449219 21 5 21 L 8 21 L 8 12 C 8 11.488281 8.386719 11.066406 8.882812 11.007812 L 9 11 L 15 11 C 15.550781 11 16 11.449219 16 12 L 16 21 L 19 21 C 19.550781 21 20 20.550781 20 20 L 20 9.488281 Z M 14 13 L 10 13 L 10 21 L 14 21 Z M 14 13 "/>
+</clipPath>
+<clipPath id="clip4">
+  <path d="M 3 22 C 1.34375 22 0 20.65625 0 19 L 0 8 C 0 7.691406 0.140625 7.398438 0.386719 7.210938 L 9.386719 0.210938 C 9.746094 -0.0703125 10.253906 -0.0703125 10.613281 0.210938 L 19.613281 7.210938 C 19.859375 7.398438 20 7.691406 20 8 L 20 19 C 20 20.65625 18.65625 22 17 22 Z M 10 2.265625 L 2 8.488281 L 2 19 C 2 19.550781 2.449219 20 3 20 L 6 20 L 6 11 C 6 10.488281 6.386719 10.066406 6.882812 10.007812 L 7 10 L 13 10 C 13.550781 10 14 10.449219 14 11 L 14 20 L 17 20 C 17.550781 20 18 19.550781 18 19 L 18 8.488281 Z M 12 12 L 8 12 L 8 20 L 12 20 Z M 12 12 "/>
+</clipPath>
+<clipPath id="clip3">
+  <rect x="0" y="0" width="20" height="22"/>
+</clipPath>
+<g id="surface5" clip-path="url(#clip3)">
+<g clip-path="url(#clip4)" clip-rule="nonzero">
+<rect x="0" y="0" width="20" height="22" style="fill:rgb(0%,0%,0%);fill-opacity:1;stroke:none;"/>
+<rect x="0" y="0" width="20" height="22" style="fill:rgb(0%,0%,0%);fill-opacity:1;stroke:none;"/>
+</g>
+</g>
+</defs>
+<g id="surface1">
+<g clip-path="url(#clip1)" clip-rule="nonzero">
+<g clip-path="url(#clip2)" clip-rule="nonzero">
+<use xlink:href="#surface5" transform="matrix(1,0,0,1,2,1)"/>
+</g>
+</g>
+</g>
+</svg>

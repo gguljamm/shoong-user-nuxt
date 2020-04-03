@@ -171,9 +171,14 @@ export default {
     width: 100%;
     background-color: #f8f9fb;
     &.main{
-      background-color: rgb(151,151,151);
+      background-image: url(~assets/img/main_bg.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
     }
     .inputEmail{
+      min-height: 100%;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, .46), rgba(0, 0, 0, 0));
       .logo{
         width: 102px;
         height: 43px;
@@ -204,6 +209,13 @@ export default {
         color: #FFF;
         font-weight: normal;
         line-height: 17px;
+      }
+      .loginBox{
+        .sub{
+          button{
+            color: #FFF;
+          }
+        }
       }
     }
     > div{

@@ -251,7 +251,7 @@ export default {
               }
             }
             .chatBubble{
-              word-break: break-all;
+              word-break: break-word;
               font-size: 14px;
               line-height: 20px;
               background-color: #f8f9fb;
