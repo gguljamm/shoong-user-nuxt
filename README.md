@@ -1,6 +1,10 @@
 # shoong-user-app
 
 > shoong app
+> 슝 고객용 앱 
+> 웹/모바일/AOS/IOS
+> cordova로 AOS/IOS 지원
+> cordova 명령어는 pakage.json 파일 참고
 
 ## Build Setup
 
