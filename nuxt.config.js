@@ -6,7 +6,7 @@ module.exports = {
     title: 'shoong-user-app',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover, shrink-to-fit=no' },
       { hid: 'description', name: 'description', content: 'shoong app' }
     ],
     link: [
@@ -19,13 +19,15 @@ module.exports = {
   modules: [
     ['nuxt-sass-resources-loader'],
   ],
-  css: ['~/assets/css/normalize.css'],
+  css: ['~/assets/css/normalize.css', 'assets/css/main.css'],
   plugins: [
     { src: '~/plugins/firebase.js', ssr: false },
+    { src: '~/plugins/cookies.js', ssr: false },
+    { src: '~/plugins/body-scroll-lock.js', ssr: false }
   ],
-  // buildDir: 'build',
+  buildDir: 'build',
   build: {
-    // publicPath: '/nuxtfiles/',
+    publicPath: '/nuxtfiles/',
     /*
     ** Run ESLint on save
     */
@@ -43,7 +45,24 @@ module.exports = {
   router: {
     mode: 'hash',
     extendRoutes(routes, resolve) {
-      let parent = routes.find(route => route.path === '/chat')
+      let parent = routes.find(route => route.path === '/')
+      parent.children = [];
+      parent.children.push({
+        name: 'index-login',
+        path: 'login',
+        component: resolve(__dirname, 'components/modal.vue'),
+      });
+      parent.children.push({
+        name: 'index-feedId',
+        path: ':feedId',
+        component: resolve(__dirname, 'components/modal.vue'),
+        children: [{
+          name: 'index-feedId-deepId',
+          path: ':deepId',
+          component: resolve(__dirname, 'components/modal.vue'),
+        }],
+      });
+      parent = routes.find(route => route.path === '/chat')
       parent.children = [];
       parent.children.push({
         name: 'chat-roomId',

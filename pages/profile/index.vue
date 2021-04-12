@@ -1,12 +1,14 @@
 <template>
-  <chat-home></chat-home>
+  <Home></Home>
 </template>
 
 <script>
-import chatHome from '~/components/chat/home';
+import Home from '~/components/profile/home';
 
 export default {
-  components: { chatHome },
+  components: {
+    Home,
+  },
   data() {
     return {};
   },

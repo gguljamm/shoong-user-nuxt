@@ -1,0 +1,88 @@
+{
+  "hello": "hello",
+  "main": {
+    "intro": "Most convenient<br>airport<br>shuttle bus<br>service",
+    "localeTap": "- tap to change language",
+    "booking": "make a reservation",
+    "csCenter": "CS center"
+  },
+  "chat": {
+    "title": "Customer service",
+    "notice": "We serve from 10 AM to 7 PM.",
+    "notice2": "If you ask us in English or",
+    "notice3": "in a language that is convenient,",
+    "notice4": "We will answer.",
+    "answer": "Usually answer within 20 minutes."
+  },
+  "bookingSuccess": {
+    "success": "Booking Success",
+    "comment": "We will notify you by e-mail<br>when the schedule is arranged."
+  },
+  "booking": {
+    "confirm": "Would you like to reserve with the information you entered?",
+    "route": {
+      "title": "Make a reservation",
+      "to": "TO THE AIRPORT",
+      "serviceInputTitle": "Choose a service",
+      "airportInputTitle": "Choose airport",
+      "from": "FROM THE AIRPORT",
+      "ICN1": "Incheon Airport Terminal 1",
+      "ICN2": "Incheon Airport Terminal 2",
+      "GMP": "Gimpo Airport"
+    },
+    "date": {
+      "title": "select a date<br>going to<br>the airport"
+    },
+    "time": {
+      "title": "select time",
+      "subTitle": "If you choose a time zone, we will email you<br>the exact time and place after assigning you a car.",
+      "timeInputTitle": "Reservation time zone",
+      "timeInputPlaceholder": "select",
+      "timePop": {
+        "title": "Select boarding time",
+        "subTitle": "Please allow enough time to arrive at the<br>airport <span class='bold'>at least 2 hours</span> before your flight.",
+        "infoTitle": "Booking Time"
+      }
+    },
+    "location": {
+      "title": "Select location",
+      "subTitle": "Please write down the location.<br>After allocating the car, we will email you the exact time and place.",
+      "inputPlaceholder": "capital building, hotel etc"
+    },
+    "userInfo": {
+      "title": "additional info",
+      "subTitle": "Please enter your e-mail accurately.",
+      "emailInputTitle": "E-mail",
+      "emailInputPlaceholder": "ID@email.com",
+      "emailErr": "please input valid email",
+      "nameInputTitle": "your name",
+      "nameInputPlaceholder": "Roy",
+      "companionsInputTitle": "companions",
+      "requestInputTitle": "request",
+      "requestInputPlaceholder": "If you have any additional requests, please enter them."
+    },
+    "checkData": {
+      "title": "Please<br>check it last",
+      "info": {
+        "name": "Name",
+        "date": "Date",
+        "time": "Time",
+        "from": "From",
+        "to": "To",
+        "companions": "Companions",
+        "request": "Request"
+      },
+      "checkDataPop": {
+        "title": "Check your email.",
+        "subTitle": "We send confirmation to your email.",
+        "yes": "YES",
+        "no": "NO"
+      }
+    }
+  },
+  "mail": {
+    "accept": "Your reservation has been confirmed.",
+    "cancel": "Your reservation has been canceled.",
+    "error": "The reservation has already been confirmed or canceled."
+  }
+}

@@ -1,12 +1,9 @@
 <template>
-  <chat-home></chat-home>
+  <div></div>
 </template>
 
 <script>
-import chatHome from '~/components/chat/home';
-
 export default {
-  components: { chatHome },
   data() {
     return {};
   },

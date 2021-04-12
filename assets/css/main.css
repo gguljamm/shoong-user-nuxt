@@ -1,0 +1,6 @@
+.popup-enter-active{
+  transition: transform .3s ease;
+}
+.popup-enter {
+  transform: translateX(100px);
+}
